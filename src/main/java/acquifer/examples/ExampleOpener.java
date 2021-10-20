@@ -2,11 +2,10 @@ package acquifer.examples;
 
 import ij.IJ;
 import ij.plugin.PlugIn;
+import net.imagej.legacy.IJ1Helper;
 
-import java.io.IOException;
-import java.nio.file.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import org.scijava.Context;
+import org.scijava.ui.swing.script.TextEditor;
 
 /** Open an example script in the script editor. <br>
  * It actually opens a temp copy of the script, to prevent overwriting the examples.<br>
@@ -20,17 +19,33 @@ public class ExampleOpener implements PlugIn {
 	 */
 	@Override
 	public void run(String subPath) {
-		Path sourcePath = Paths.get(IJ.getDirectory("imagej"), "scripts", "Acquifer", "examples", subPath);
-	    Path destPath   = Paths.get(IJ.getDirectory("temp"), sourcePath.getFileName().toString()); 
-        try {
-			Files.copy(sourcePath, destPath, StandardCopyOption.REPLACE_EXISTING); // overwrite previous temp file of same name
-		} catch (IOException e) {
-			e.printStackTrace();
+		String url = getClass().getClassLoader().getResource(subPath).toString();
+		String extension = url.substring(url.lastIndexOf(".") + 1);
+		
+		String language;
+		switch(extension) {
+			
+		case("py"):
+			language = "python";
+			break;
+		
+		case("ijm"):
+			language = "IJ1 Macro";
+			break;
+		
+		default:
+			throw new IllegalArgumentException("Currently implemented only for .py and .ijm files");
 		}
 		
-		//File scriptFile = new File(filePath);
-		//scriptFile.setReadOnly(); // prevent overwriting examples, not used anymore, was making the update show a disclaimer
-		IJ.open(destPath.toString());
+		// Get the script editor
+		Context context = IJ1Helper.getLegacyContext();
+		TextEditor editor = new TextEditor(context);
+		editor.setVisible(true);
+		
+		// Open a tab with the example
+		editor.newTab(IJ.openUrlAsString(url),
+					  language);
+				
 	}
 
 }

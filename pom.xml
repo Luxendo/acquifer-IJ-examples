@@ -4,14 +4,60 @@
   <artifactId>acquifer-IJ-examples</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   
+  	<parent>
+		<groupId>org.scijava</groupId>
+		<artifactId>pom-scijava</artifactId>
+		<version>31.0.0</version>
+		<relativePath />
+	</parent>
+	
+  	<repositories>
+	
+		<repository>
+			<id>scijava.public</id>
+			<url>https://maven.scijava.org/content/groups/public</url>
+		</repository>
+	
+		<repository>
+			<id>sonatype</id>
+			<url>http://oss.sonatype.org/content/groups/public</url>
+		</repository>
+		
+		<repository>
+			<id>imagej.releases</id>
+			<url>
+				http://maven.imagej.net/content/repositories/releases
+			</url>
+		</repository>
+		
+		<repository>
+			<id>imagej.snapshots</id>
+			<url>
+				http://maven.imagej.net/content/repositories/snapshots
+			</url>	
+		</repository>
+	
+	</repositories>
+  
   <dependencies>
   
   		<dependency>
 			<groupId>net.imagej</groupId>
 			<artifactId>ij</artifactId>
-			<version>1.53i</version>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/net.imagej/imagej-legacy -->
+		<dependency>
+		    <groupId>net.imagej</groupId>
+		    <artifactId>imagej-legacy</artifactId>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.scijava/scijava-common -->
+		<dependency>
+		    <groupId>org.scijava</groupId>
+		    <artifactId>scijava-common</artifactId>
+		</dependency>
+ 
   </dependencies>
 		
   <build>
@@ -19,7 +65,6 @@
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>

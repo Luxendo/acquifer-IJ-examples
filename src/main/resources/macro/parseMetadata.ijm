@@ -21,50 +21,50 @@ image_name = "-A002--PO01--LO001--CO6--SL001--PX32500--PW0080--IN0020--TM281--X0
 
 print("Image name :", image_name);
 
-ID = Ext.getWellId(image_name);
+ID = Ext.IM_getWellId(image_name);
 print("Well Id :", ID);
 
-Ext.getWellColumn(image_name, column);
+Ext.IM_getWellColumn(image_name, column);
 print("Plate column : ", column);
 
-row = Ext.getWellRow(image_name);
+row = Ext.IM_getWellRow(image_name);
 print("Plate row : ", row);
 
-Ext.getWellSubPosition(image_name, subposition);
+Ext.IM_getWellSubPosition(image_name, subposition);
 print("Well subposition : ", subposition);
 
-Ext.getWellIndex(image_name, well_index);
+Ext.IM_getWellIndex(image_name, well_index);
 print("Well index (order of acquisition) : ", well_index);
 
-Ext.getXYPosition(image_name, x_mm, y_mm);
+Ext.IM_getXYPosition(image_name, x_mm, y_mm);
 print("Positions (mm) X: ", x_mm, " Y: ", y_mm);
 
-Ext.getZPosition(image_name, z_mm);
+Ext.IM_getZPosition(image_name, z_mm);
 print("Position Z (mm) : ", z_mm);
 
-Ext.getZSlice(image_name, z_slice);
+Ext.IM_getZSlice(image_name, z_slice);
 print("Z-slice : ", z_slice);
 
-Ext.getLightPower(image_name, light_power);
+Ext.IM_getLightPower(image_name, light_power);
 print("Light power (%) : ", light_power);
 
-Ext.getLightExposure(image_name, light_exposure);
+Ext.IM_getLightExposure(image_name, light_exposure);
 print("Exposure time (ms) : ", light_exposure);
 
-Ext.getChannelIndex(image_name, channel);
+Ext.IM_getChannelIndex(image_name, channel);
 print("Channel index : ", channel);
 
-Ext.getObjectiveMagnification(image_name, magnification);
+Ext.IM_getObjectiveMagnification(image_name, magnification);
 print("Objective Magnification (X) : ", magnification);
 
-Ext.getObjectiveNA(image_name, objective_NA);
+Ext.IM_getObjectiveNA(image_name, objective_NA);
 print("Objective NA : ", objective_NA);
 
-Ext.getPixelSize(image_name, pixel_size_um); // this function also exists in ImageJ, hence the different text-color
+Ext.IM_getPixelSize(image_name, pixel_size_um); // this function also exists in ImageJ, hence the different text-color
 print("Pixel Size (um) : ", pixel_size_um);
 
-Ext.getTimepoint(image_name, timepoint);
+Ext.IM_getTimepoint(image_name, timepoint);
 print("Timepoint : ", timepoint);
 
-Ext.getTemperature(image_name, temperature);
+Ext.IM_getTemperature(image_name, temperature);
 print("Temperature (°C) : ", temperature);

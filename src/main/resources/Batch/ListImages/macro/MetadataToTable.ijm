@@ -21,13 +21,13 @@ imageName = File.getName(imagePath);  // get filename from filepath
 // Fill table row
 newRowIndex = Table.size; // row index = table.size (because row indexes are 0-based, the latest row index in the table is size-1, hence the next one is size)
 Table.set("Filepath", newRowIndex, imagePath);
-Table.set("Well", newRowIndex, Ext.getWellId(imageName));
+Table.set("Well", newRowIndex, Ext.IM_getWellId(imageName));
 
-Ext.getLoopIteration(imageName, timepoint); // the value is returned in the variable timepoint
+Ext.IM_getLoopIteration(imageName, timepoint); // the value is returned in the variable timepoint
 Table.set("Timepoint", newRowIndex, timepoint);
 
-Ext.getZSlice(imageName, slice);
+Ext.IM_getZSlice(imageName, slice);
 Table.set("Z-index", newRowIndex, slice);
 
-Ext.getChannelIndex(imageName, channel);
+Ext.IM_getChannelIndex(imageName, channel);
 Table.set("Channel", newRowIndex, channel);

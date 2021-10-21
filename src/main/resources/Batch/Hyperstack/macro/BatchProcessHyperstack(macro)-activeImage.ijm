@@ -8,10 +8,8 @@
  * The macro applies a simple example: edge detection, and saves the image of the edges to the "default" directory (indicated in the Batch Process Hyperstack plugin's GUI)
  * The path of the saved images is reported to the log window. Clicking the imagepath in the log window will directly open the image in Fiji. 
  *
- * NOTE : When open via the menu ACQUIFER > Examples, this script file opens as a temporary file.
- * Changes to this file will thus NOT be saved, in particular the next time you open this example via the menu, the original example will be shown.
  * Use File > Save As... to save a copy of this example, and keep your modifications.
- * You can also find all the examples on the following GitHub repository: https://github.com/acquifer/Fiji-examples
+ * You can also find all the examples on the following GitHub repository: https://github.com/acquifer/acquifer-IJ-examples/tree/main/src/main/resources
  */
  
 // Activate batch mode (optional)

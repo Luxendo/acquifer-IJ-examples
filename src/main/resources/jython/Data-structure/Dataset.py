@@ -4,7 +4,6 @@ A Dataset is a fixed view of an IM directory : depending on optional dimension f
 To create a dataset, one uses a DatasetBuilder, which provides a convenient syntax for optional dimensions filtering and sorting. 
 The dataset is recovered from the Builder by calling the method build. 
 Image files in a Dataset are represented as ImagePlane. 
- 
 """
 #@ File (label="Select an IM directory", style="directory") directory 
 from ij import IJ 

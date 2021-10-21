@@ -7,10 +7,8 @@ The script relies on the acquifer-core java package, provided with the acquifer 
 This script can be run in the Fiji script editor, and requires a dataset of IM images.
 Similar scripts in other scripting language can be written by adapting the import statements and general syntax.
 
-NOTE : When open via the menu ACQUIFER > Examples, this script file opens as a temporary file.
-Changes to this file will thus NOT be saved, in particular the next time you open this example via the menu, the original example will be shown.
 Use File > Save As... to save a copy of this example, and keep your modifications.
-You can also find all the examples on the following GitHub repository: https://github.com/acquifer/Fiji-examples
+You can also find all the examples on the following GitHub repository: https://github.com/acquifer/acquifer-IJ-examples/tree/main/src/main/resources
 """
 #@ File (label="Select an IM directory", style="directory") image_directory
 

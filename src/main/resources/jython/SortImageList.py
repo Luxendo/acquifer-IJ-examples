@@ -3,12 +3,10 @@ Once images from a directory are listed, and metadata extracted, one can sort th
 The default sorting order is as following (well, subposition, timepoint, Z-slice, -channel).
 -channel means that the channels are sorted in reverse order, ie channel 6 (Brightfield) first.
 
-This script takes a image directory and return the list of IM image files first unsorted and then sorted using the default order.
+This script takes an image directory and returns the list of IM image files first unsorted and then sorted using the default order.
 
-NOTE : When open via the menu ACQUIFER > Examples, this script file opens as a temporary file.
-Changes to this file will thus NOT be saved, in particular the next time you open this example via the menu, the original example will be shown.
 Use File > Save As... to save a copy of this example, and keep your modifications.
-You can also find all the examples on the following GitHub repository: https://github.com/acquifer/Fiji-examples
+You can also find all the examples on the following GitHub repository: https://github.com/acquifer/acquifer-IJ-examples/tree/main/src/main/resources
 """
 #@ File (label="Select an IM directory", style="directory") image_directory
 

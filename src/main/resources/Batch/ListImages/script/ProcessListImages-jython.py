@@ -9,10 +9,8 @@ The image file is passed directly as a File object (https://docs.oracle.com/java
 From this File object, you can recover the filepath as shown below.
 From there you can open the image in Fiji or process the file without opening the image (e.g. to move files around).
 
-NOTE : When open via the menu ACQUIFER > Examples, this script file opens as a temporary file.
-Changes to this file will thus NOT be saved, in particular the next time you open this example via the menu, the original example will be shown.
 Use File > Save As... to save a copy of this example, and keep your modifications.
-You can also find all the examples on the following GitHub repository: https://github.com/acquifer/Fiji-examples
+You can also find all the examples on the following GitHub repository: https://github.com/acquifer/acquifer-IJ-examples/tree/main/src/main/resources
 """
 #@ File image_file
 from ij import IJ, ImagePlus

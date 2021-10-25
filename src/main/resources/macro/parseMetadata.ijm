@@ -54,12 +54,6 @@ print("Exposure time (ms) : ", light_exposure);
 Ext.IM_getChannelIndex(image_name, channel);
 print("Channel index : ", channel);
 
-Ext.IM_getObjectiveMagnification(image_name, magnification);
-print("Objective Magnification (X) : ", magnification);
-
-Ext.IM_getObjectiveNA(image_name, objective_NA);
-print("Objective NA : ", objective_NA);
-
 Ext.IM_getPixelSize(image_name, pixel_size_um); // this function also exists in ImageJ, hence the different text-color
 print("Pixel Size (um) : ", pixel_size_um);
 

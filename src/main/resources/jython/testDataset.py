@@ -44,4 +44,4 @@ dataset2 = DatasetBuilder(directory).includeWellIds(filterWells) \
 #dataset = Dataset(builder)
 print "Dataset filtered", dataset2
 IJ.log("\nlist of images")
-Utils.printArray(dataset2.getListImagePlanes())
+Utils.printArray(dataset2.getListOfImagePlanes())

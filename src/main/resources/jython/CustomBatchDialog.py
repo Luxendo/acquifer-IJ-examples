@@ -43,7 +43,7 @@ if dialog.wasOKed():
 	print "Timepoints: "    ,  dialog.getTimepoints()
 	
 	# We can also recover the dataset object matching the selected dimensions
-	# Use dataset.getListImagePlanes to recover the images in the dataset, see Examples > data-structures
+	# Use dataset.getListOfImagePlanes to recover the images in the dataset, see Examples > data-structures
 	dataset = dialog.getMatchingDataset()
 	print "\n", dataset
 	

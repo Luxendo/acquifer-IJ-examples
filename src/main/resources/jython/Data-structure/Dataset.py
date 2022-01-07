@@ -37,7 +37,7 @@ dataset   = builder.sortBy(sortOrder)\
 				   .build() 
  
 
-listPlanes = dataset.getListImagePlanes()                          # get the list of images (ImagePlane objects) in this dataset instance
+listPlanes = dataset.getListOfImagePlanes()                          # get the list of images (ImagePlane objects) in this dataset instance
 print "\nFirst 2 ImagePlanes in sorted dataset : ", listPlanes[:2] # show only the first 2 ImagePlane below in the command line output
 IJ.log("\nSorted dataset")                                        
 Utils.printArray(listPlanes)                                       # show the full list in a log window

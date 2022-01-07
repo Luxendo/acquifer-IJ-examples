@@ -39,10 +39,6 @@ print "Exposure time (ms) :", parser.getLightExposure(filename)
 
 print "Channel index :", parser.getChannelIndex(filename) 
 
-print "Objective Magnification :", parser.getObjectiveMagnification(filename)
-
-print "Objective NA :", parser.getObjectiveNA(filename)
-
 print "Pixel Size (um): ", parser.getPixelSize(filename)
 
 print "Timepoint :", parser.getTimepoint(filename)

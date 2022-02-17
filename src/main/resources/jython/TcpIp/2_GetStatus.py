@@ -41,3 +41,5 @@ print "Script mode active :", myIM.isScriptMode();
 # Use myIM.openLid() / myIM.closeLid() to move the Lid accordingly
 print "\nLid is closed", myIM.isLidClosed();
 print "\nLid is opened", myIM.isLidOpened();
+
+myIM.closeConnection()

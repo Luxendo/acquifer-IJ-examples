@@ -22,9 +22,11 @@ from ij.plugin import Commands
 IJ.log("Processing stack : " + stack.getTitle())
 IJ.log("Processing projection : " + proj.getTitle())
 
-# You custom processing command
+# Your custom processing commands, here we just display the images
+stack.show()
+proj.show()
 
-# Close images (and free memory)
+## Close images (and free memory)
 
 # either one by one
 stack.close()

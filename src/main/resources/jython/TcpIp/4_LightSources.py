@@ -35,13 +35,10 @@ from java.lang import Thread
 myIM = TcpIp() # open the communication port with the IM
 
 
-
-# Brightfield
-help(myIM.setBrightField)
-
+# Set Brightfield on/off
 channelNumber = 1   # this is for filenaming only, the CO* tag
-detectionFilter = 3 # positional index of the detection filter (1 to 4), depending on the filter, the overall image intensity varies.
-intensity = 80 # relative intensity
+detectionFilter = 2 # positional index of the detection filter (1 to 4), depending on the filter, the overall image intensity varies.
+intensity = 50 # relative intensity
 exposure = 100 # camera exposure in ms for this channel
 lightConstantOn = False
 

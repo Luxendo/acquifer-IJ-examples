@@ -21,4 +21,5 @@ experimentPath = r"C:\Users\Admin\Example\myScript.imsf"
 myIM.runScript(experimentPath) # This will pause further code execution until the script is finished running
 
 # Just close the port once the script is finished, also switching off any light source if any
-myIM.closeConnection() 
+myIM.closeConnection()
+print "Done"

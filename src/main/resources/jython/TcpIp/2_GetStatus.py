@@ -5,10 +5,6 @@ from acquifer.core import TcpIp
 
 myIM = TcpIp() # open the communication port with the IM
 
-# You can always print the docstring associated to objects and function
-print help(myIM)
-print help(myIM.getPositionX)
-
 # Check temperature sensor values
 # There are 2 sensors, one for the ambiant temp, and one for the sample temp
 # Note : the prefix u before the string defines a unicode string to make sure the special character ° is displayed correctly 
@@ -40,6 +36,6 @@ print "Script mode active :", myIM.isScriptMode();
 # Lid status (open/close)
 # Use myIM.openLid() / myIM.closeLid() to move the Lid accordingly
 print "\nLid is closed", myIM.isLidClosed();
-print "\nLid is opened", myIM.isLidOpened();
+print "Lid is opened", myIM.isLidOpened();
 
 myIM.closeConnection()

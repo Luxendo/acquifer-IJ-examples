@@ -35,17 +35,23 @@ while not (inRange1 and inRange2):
 	TimeUnit.MINUTES.sleep(waitInterval)
 	
 	# Check the temperature after waiting
+	print "-> Checking temperature..."
 	currentTemp = myIM.getTemperatureSample()
 	
 	# Check if in range target +/- margin
 	if (targetTemp - margin <= currentTemp and currentTemp <= targetTemp + margin): # in-range
-		
+	
 		if (inRange1): # last timepoint already in-range
 			inRange2 = True
+			print "Temperature is in range (again), about to start experiment..."
+	
 		else:
 			inRange1 = True
-		
+			print "Temperature is in range (1st-time)"
+	
+	
 	else: # Not in range -> Reset "history"
+		print "Temperature not in range, still waiting for {} minutes".format(waitInterval)
 		inRange1 = False
 		inRange2 = False
 

@@ -6,6 +6,7 @@ Option 1 : waiting for a fixed time interval before starting the script
 Option 2 : Actively checking the temperature regularly to know if it has reached the target value
 """
 from acquifer.core import TcpIp
+from java.util.concurrent import TimeUnit
 
 myIM = TcpIp() # open the communication port with the IM
 
@@ -50,7 +51,9 @@ while not (inRange1 and inRange2):
 
 # Here we use a raw-string (prefixed with r), to prevent backslash to be interpreted as special character such as new line for \n
 # You dont need raw string if your path is using forward slash / or double back slash \\ as separator
+print "Starting the experiment"
 experimentPath = r"C:\Users\Admin\Example\myScript.imsf"
 myIM.runScript(experimentPath) # This will pause further code execution until the script is finished running
 
 myIM.closeConnection()
+print "Done"

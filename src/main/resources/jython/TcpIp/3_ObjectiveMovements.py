@@ -3,7 +3,7 @@ This script demonstrates how to actively control the Imaging Machine via an exte
 For instance to set a specific objective, and move it across the plate to a given X,Y,Z position.
 """
 from acquifer.core import TcpIp
-from java.util.concurrent import TimeUnit
+from java.lang import Thread
 
 myIM = TcpIp() # open the communication port with the IM
 
@@ -19,16 +19,25 @@ x = 10.123 # mm with max 3 decimal places
 y = 30.456
 
 # Move XY
+print "Moving XY"
 myIM.moveXYto(x,y)
+print "Waiting 5 seconds before next move"
+Thread.sleep(5000) # wait 5 seconds before moving (so you can see it)
 myIM.moveXYby(10.2, -5.5) # Move by another 10.2 mm along x, move back by 5.5 mm along y
 
 # Move Z
 z = 456.1 # µm with max 1 decimal place
+print "Moving Z"
 myIM.moveZto(z)
+print "Waiting 5 seconds before next move"
+Thread.sleep(5000) # wait 5 seconds before moving (so you can see it)
 myIM.moveZby(3.3)
 
 # Move X,Y,Z all at once
 # For this one there is only the absolute movement version
+Thread.sleep(5000) # wait 5 seconds before moving (so you can see it)
+print "Moving XYZ"
 myIM.moveXYZto(x,y,z)
 
 myIM.closeConnection()
+print "Done"

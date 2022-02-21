@@ -33,7 +33,7 @@ myIM.setMetadataWellId("C002") # this should be a 4-character string : a charact
 myIM.setMetadataSubposition(1) # to specify if we are acquiring subpositions within a well
 myIM.setMetadataTimepoint(1)   # for timelapse
 
-# OPTION1 : Full set of arguments including custom directory to save the images
+# OPTION1 : acquire with full set of arguments including custom directory to save the images
 channelNumber = 1 # this is for filenaming (the CO tag)
 lightSource = "brightfield"
 detectionFilter = 2 # between 1 and 4
@@ -47,7 +47,8 @@ lightConstantOn = False
 # For saveDirectory we pass a raw string (r prefix) so that backslashes are not interpreted as special characters
 # one can also use nromal string with double backslashes as separators \\ or forward slash /
 # if the directory does not exist, it is automatically created
-saveDirectory = r"C:\Users\Default\Desktop\MyDataset" 
+# if "" or None is passed as argument ot acquire, the images are saved in the default project folder within a plate-specific directory (see below) 
+saveDirectory = r"C:\Users\Default\Desktop\MyDataset"
 
 myIM.acquire(channelNumber, 
 			 lightSource, 
@@ -61,9 +62,20 @@ myIM.acquire(channelNumber,
 			 saveDirectory)
 
 
+
 # OPTION2 : Using default project folder and plate ID
+# This avoids the need to specify the image directory for every new acquire command
+#
+# NOTE : Make sure to set the default project folder and plateID before switching to script mode
+# This will assure the following acquire commands are saved in the the same subdirectory
+# Indeed when switching to script mode, a timestamp is created that is used as part of the plate directory
 myIM.setDefaultProjectFolder(r"C:\Users\Default\Desktop\MyDataset")
 myIM.setPlateId("test") # every new call to acquire will save the images in a new sub-folder of default project folder, named with a unique timestamp followed by the plateID
+
+# Switch to script mode before calling successive acquire commands
+# otherwise each acquire command will switch back to live mode after execution (time consuming)
+# this also make sure that the successive acquire commands all save the images in the same plate directory
+myIM.setMode("script")
 
 myIM.setMetadataWellId("A001")
 myIM.acquire( channelNumber, 
@@ -73,7 +85,7 @@ myIM.acquire( channelNumber,
 			 exposure, 
 			 zStackCenter,
 			 nSlices, 
-			 zStepSize) # here we dont specify the output directory nor the lightConstantOn which default to False
+			 zStepSize) # here we dont specify the output directory so images will be saved in the dfault projectDirectory/timestamp_plateID. lightConstantOn is not specified neither and default to False
 
 myIM.setMetadataWellId("A002")
 myIM.acquire( channelNumber, 
@@ -87,4 +99,4 @@ myIM.acquire( channelNumber,
 			 True,
 			 None) # here we specify lightConstantOn to True, and set the saveDirectory to None, in this case the images are also saved to the default project directory within a plate subdirectory
 
-myIM.closeConnection()
+myIM.closeConnection() # closing the connection will automatically switch back to live mode

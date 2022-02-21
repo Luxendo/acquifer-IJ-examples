@@ -49,7 +49,7 @@ Thread.sleep(5000) # wait 5 secs, to leave the opportunity to see it
 # OPTION 3 : Set the binning factor only
 # this command also resets the default full sensor area 2048 x 2048 
 # binning value can be one of 1 (no binning), 2 (2x2), 4 (4x4)
-myIM.setCamerBinning(binning)
+myIM.setCameraBinning(binning)
 Thread.sleep(5000) # wait 5 secs, to leave the opportunity to see it
 
 

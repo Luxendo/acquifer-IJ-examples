@@ -65,15 +65,13 @@ myIM.acquire(channelNumber,
 # OPTION2 : Using default project folder and plate ID
 # This avoids the need to specify the image directory for every new acquire command
 #
-# NOTE : Make sure to set the default project folder and plateID before switching to script mode
-# This will assure the following acquire commands are saved in the the same subdirectory
+# This will assure the following acquire commands are saved in the same subdirectory
 # Indeed when switching to script mode, a timestamp is created that is used as part of the plate directory
 myIM.setDefaultProjectFolder(r"C:\Users\Default\Desktop\MyDataset")
 myIM.setPlateId("test")
 
 # Switch to script mode before calling successive acquire commands
 # otherwise each acquire command will switch back to live mode after execution (time consuming)
-# this also make sure that the successive acquire commands all save the images in the same plate directory
 myIM.setMode("script")
 
 

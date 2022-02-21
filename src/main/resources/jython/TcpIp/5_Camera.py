@@ -24,6 +24,10 @@ from java.lang import Thread
 
 myIM = TcpIp() # open the communication port with the IM
 
+# Switch on the brightfield channel to activate an image-preview in the IM software
+myIM.setBrightField(1, 2, 50, 100)
+
+
 # You have different options to set the camera sensor area an/or binning
 
 # OPTION 1 : Set the camera sensor area + binning all at once

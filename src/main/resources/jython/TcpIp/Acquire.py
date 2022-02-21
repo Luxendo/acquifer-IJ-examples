@@ -21,7 +21,6 @@ Switching between script and live mode takes a few seconds. Therefore for succes
 using the setMode("script") command.
 """
 from acquifer.core import TcpIp
-from java.lang import Thread
 
 myIM = TcpIp()
 
@@ -45,9 +44,9 @@ zStepSize = 10 # µm
 lightConstantOn = False
 
 # For saveDirectory we pass a raw string (r prefix) so that backslashes are not interpreted as special characters
-# one can also use nromal string with double backslashes as separators \\ or forward slash /
+# one can also use normal string with double backslashes as separators \\ or forward slash /
 # if the directory does not exist, it is automatically created
-# if "" or None is passed as argument ot acquire, the images are saved in the default project folder within a plate-specific directory (see below) 
+# if "" or None is passed as argument to acquire, the images are saved in the default project folder within a plate-specific directory (see below) 
 saveDirectory = r"C:\Users\Default\Desktop\MyDataset"
 
 myIM.acquire(channelNumber, 

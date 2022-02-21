@@ -70,33 +70,50 @@ myIM.acquire(channelNumber,
 # This will assure the following acquire commands are saved in the the same subdirectory
 # Indeed when switching to script mode, a timestamp is created that is used as part of the plate directory
 myIM.setDefaultProjectFolder(r"C:\Users\Default\Desktop\MyDataset")
-myIM.setPlateId("test") # every new call to acquire will save the images in a new sub-folder of default project folder, named with a unique timestamp followed by the plateID
+myIM.setPlateId("test")
 
 # Switch to script mode before calling successive acquire commands
 # otherwise each acquire command will switch back to live mode after execution (time consuming)
 # this also make sure that the successive acquire commands all save the images in the same plate directory
 myIM.setMode("script")
 
-myIM.setMetadataWellId("A001")
-myIM.acquire( channelNumber, 
-			 lightSource, 
-			 detectionFilter, 
-			 intensity, 
-			 exposure, 
-			 zStackCenter,
-			 nSlices, 
-			 zStepSize) # here we dont specify the output directory so images will be saved in the dfault projectDirectory/timestamp_plateID. lightConstantOn is not specified neither and default to False
 
-myIM.setMetadataWellId("A002")
-myIM.acquire( channelNumber, 
-			 lightSource, 
+# Define channel settings
+detectionFilter = 2 # here we use the same detection filter between brightfield and fluo bu we could use different ones for each
+
+intensityBF = 50  # relative intensity of the lightsource in %
+exposureBF  = 100 # exposure in ms
+
+intensityFluo = 80  # relative intensity of the lightsource in %
+exposureFluo  = 150 # exposure in ms
+
+# Stack settings (identical for brigtfield and fluo)
+zStackCenter = 18000 # in µm
+nSlices = 20
+zStepSize = 10 # µm
+
+# Acquire brightfield channel
+myIM.setMetadataWellId("A001")
+myIM.acquire(1, # here we set channel number for brightfield to 1, this defines the value for the tag "CO" in the filename
+			 "brightfield", 
+			 detectionFilter,
+			 intensityBF, 
+			 exposureBF, 
+			 zStackCenter, 
+			 nSlices, 
+			 zStepSize) # here we set channel number for brightfield to 1
+						# here we dont specify the output directory so images will be saved in the dfault projectDirectory/timestamp_plateID. lightConstantOn is not specified neither and default to False
+
+# Acquire fluo channel
+myIM.acquire(2, # here we set channel number for this fluo channel to 2, this defines the value for the tag "CO" in the filename
+			 "100000", # use the 1st fluo light source, see the "LightSource" example script
 			 detectionFilter, 
-			 intensity, 
-			 exposure, 
+			 intensityFluo, 
+			 exposureFluo, 
 			 zStackCenter,
 			 nSlices, 
 			 zStepSize,
-			 True,
-			 None) # here we specify lightConstantOn to True, and set the saveDirectory to None, in this case the images are also saved to the default project directory within a plate subdirectory
+			 True, # here we specifiy lightConstantOn to true, so fluo light source is not blinking 
+			 None) # set the saveDirectory to None, in this case the images are saved to the default project directory as above
 
 myIM.closeConnection() # closing the connection will automatically switch back to live mode

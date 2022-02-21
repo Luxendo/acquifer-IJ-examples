@@ -65,7 +65,7 @@ myIM.acquire(channelNumber,
 myIM.setDefaultProjectFolder(r"C:\Users\Default\Desktop\MyDataset")
 myIM.setPlateId("test") # every new call to acquire will save the images in a new sub-folder of default project folder, named with a unique timestamp followed by the plateID
 
-myIM.setMetadatWellId("A001")
+myIM.setMetadataWellId("A001")
 myIM.acquire( channelNumber, 
 			 lightSource, 
 			 detectionFilter, 
@@ -75,7 +75,7 @@ myIM.acquire( channelNumber,
 			 nSlices, 
 			 zStepSize) # here we dont specify the output directory nor the lightConstantOn which default to False
 
-myIM.setMetadatWellId("A002")
+myIM.setMetadataWellId("A002")
 myIM.acquire( channelNumber, 
 			 lightSource, 
 			 detectionFilter, 

@@ -93,9 +93,16 @@ for timepoint in range(1, nTimepoints+1): # range is exclusive ie it will be fro
 	print "Starting timepoint :", timepoint
 	
 	for well in listWell:
+		
 		print "Imaging well :", well.ID 
+		
+		# Acquire 1st subposition
 		myIM.moveXYto(well.X, well.Y)
 		acquireZStack(well.ID, 1, timepoint)
+		
+		# Acquire 2nd subposition which is 2.5 mm apart from the center in X and Y
+		myIM.moveXYby(2.5, 2.5)
+		acquireZStack(well.ID, 2, timepoint)
 	
 	# Wait before next timepoint
 	TimeUnit.MINUTES.sleep(timeStep)

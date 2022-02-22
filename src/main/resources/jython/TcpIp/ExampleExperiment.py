@@ -79,7 +79,7 @@ def acquireZStack(wellID, subposition, timepoint):
 myIM = TcpIp()
 
 # Initial settings
-myIM.setObjective(2) # Use objective 2, which usually corresponds to the 4X
+myIM.setObjective(3) # Use objective 3, which usually corresponds to the 10X
 
 # Set output directory
 myIM.setDefaultProjectFolder(project.getPath())

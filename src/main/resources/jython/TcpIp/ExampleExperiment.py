@@ -90,7 +90,10 @@ myIM.setMode("script")
 
 for timepoint in range(1, nTimepoints+1): # range is exclusive ie it will be from 1 to 3
 	
+	print "Starting timepoint : ", timepoint
+	
 	for well in listWell:
+		print "Imaging well : ", well.ID 
 		myIM.moveXYto(well.X, well.Y)
 		acquireZStack(well.ID, 1, timepoint)
 	
@@ -99,3 +102,4 @@ for timepoint in range(1, nTimepoints+1): # range is exclusive ie it will be fro
 	#TimeUnit.HOURS.sleep(timeStep) # use this one for hours
 
 myIM.closeConnection()
+print "Done"

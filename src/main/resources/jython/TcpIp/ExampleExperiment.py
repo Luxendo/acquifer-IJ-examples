@@ -16,7 +16,7 @@ Well = collections.namedtuple('Well', ['ID', 'X', 'Y']) # Well here is like a co
 # these X,Y coordinates corresponds to the center of the well in mm
 listWell = [Well("A001", 14.335, 10.809),
 			Well("A002", 23.370, 10.809),
-			Well("A002", 32.404, 10.809)]
+			Well("A003", 32.404, 10.809)]
 
 # Timelapse infos
 nTimepoints = 3
@@ -61,7 +61,7 @@ def acquireZStack(wellID, subposition, timepoint):
 				 80,            # intensity (%) 
 				 100,           # exposure (ms)
 				 zFocus,        # z-stack center 
-				 nslices, 
+				 nSlices, 
 				 zStepSize)
 	
 	# Acquire fluo channel
@@ -90,16 +90,18 @@ myIM.setMode("script")
 
 for timepoint in range(1, nTimepoints+1): # range is exclusive ie it will be from 1 to 3
 	
-	print "Starting timepoint : ", timepoint
+	print "Starting timepoint :", timepoint
 	
 	for well in listWell:
-		print "Imaging well : ", well.ID 
+		print "Imaging well :", well.ID 
 		myIM.moveXYto(well.X, well.Y)
 		acquireZStack(well.ID, 1, timepoint)
 	
 	# Wait before next timepoint
 	TimeUnit.MINUTES.sleep(timeStep)
 	#TimeUnit.HOURS.sleep(timeStep) # use this one for hours
+
+	print "Waiting for", timeStep, "minutes"
 
 myIM.closeConnection()
 print "Done"

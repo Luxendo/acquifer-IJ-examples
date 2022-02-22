@@ -37,11 +37,12 @@ def acquireZStack(wellID, subposition, timepoint):
 	
 	# Run the autofocus using the brightfield channel and 2x2 binning
 	myIM.setCameraBinning(2)
+	zCenter = 19000 # for AF only, in µm 
 	zFocus = myIM.runSoftwareAutoFocus("bf",   # lightSource
 										2,     # detectionFilter 
 										80,    # intensity (%)
 										50,    # exposure (ms)
-										18000, # zStackCenter (µm)
+										zCenter, # zStackCenter (µm)
 										11,    # nSlices 
 										15)    # zStepSize (µm)
 	

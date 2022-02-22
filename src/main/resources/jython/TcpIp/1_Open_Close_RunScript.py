@@ -26,3 +26,4 @@ myIM.runScript(experimentPath) # This will pause further code execution until th
 # Just close the port once the script is finished, also switching off any light source if any
 myIM.closeConnection()
 print "Done"
+# You could even put some custom code here to send a mail notification once the experiment is over

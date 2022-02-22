@@ -106,10 +106,9 @@ for timepoint in range(1, nTimepoints+1): # range is exclusive ie it will be fro
 		acquireZStack(well.ID, 2, timepoint)
 	
 	# Wait before next timepoint
+	print "Waiting for", timeStep, "minutes"
 	TimeUnit.MINUTES.sleep(timeStep)
 	#TimeUnit.HOURS.sleep(timeStep) # use this one for hours
-
-	print "Waiting for", timeStep, "minutes"
 
 myIM.closeConnection()
 print "Done"

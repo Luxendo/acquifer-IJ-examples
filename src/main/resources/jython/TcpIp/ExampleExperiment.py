@@ -62,8 +62,8 @@ def acquireZStack(wellID, subposition, timepoint):
 	zStepSize = 10 # µm
 	
 	# Acquire 1st channel : brightfield
-	myIM.acquire(objectiveIndex,
-				 1, # channel number, for filenaming : tag "CO"
+	myIM.acquire(1, # channel number, for filenaming : tag "CO"
+				 objectiveIndex,
 				 "brightfield", # lightSource
 				 2,             # detectionFilter
 				 80,            # intensity (%) 
@@ -73,8 +73,8 @@ def acquireZStack(wellID, subposition, timepoint):
 				 zStepSize)
 	
 	# Acquire fluo channel
-	myIM.acquire(objectiveIndex,
-				 2, 
+	myIM.acquire(2,
+				 objectiveIndex,
 				 "100000", # use the 1st fluo light source, see the "LightSource" example script
 				 3, 
 				 70, 

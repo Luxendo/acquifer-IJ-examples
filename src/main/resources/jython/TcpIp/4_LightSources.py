@@ -18,7 +18,7 @@ When switching multiple LED at once, the user-defined illumination intensity is 
 Example 50% with LED 1 and 2 will result in both LED set to 50%.
 
 # Note about the live/script mode
-In live mode (default if no script is running), the light source is directly activated upon sending the command.
+In live mode (default if no script is running), the light source and camera preview is directly activated upon sending the command.
 A "switch-off" command should thus be sent to switch-off the light source.
 
 In script mode, the light source are switched on/off automatically while the camera is acquiring images.

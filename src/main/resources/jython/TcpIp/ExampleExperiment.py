@@ -35,10 +35,16 @@ def acquireZStack(wellID, subposition, timepoint):
 	myIM.setMetadataSubposition(subposition)
 	myIM.setMetadataTimepoint(timepoint)
 	
+	# Define objective used for AF and acquisition
+	# The objective index is between 1 and 4, with increasing magnifications
+	# Typically the first objective (index 1) is the 2X
+	objectiveIndex = 1
+	
 	# Run the autofocus using the brightfield channel and 2x2 binning
 	myIM.setCameraBinning(2)
 	zCenter = 19000 # for AF only, in µm 
-	zFocus = myIM.runSoftwareAutoFocus("bf",   # lightSource
+	zFocus = myIM.runSoftwareAutoFocus(objectiveIndex,
+										"bf",   # lightSource
 										2,     # detectionFilter 
 										80,    # intensity (%)
 										50,    # exposure (ms)
@@ -56,7 +62,8 @@ def acquireZStack(wellID, subposition, timepoint):
 	zStepSize = 10 # µm
 	
 	# Acquire 1st channel : brightfield
-	myIM.acquire(1, # channel number, for filenaming : tag "CO"
+	myIM.acquire(objectiveIndex,
+				 1, # channel number, for filenaming : tag "CO"
 				 "brightfield", # lightSource
 				 2,             # detectionFilter
 				 80,            # intensity (%) 
@@ -66,7 +73,8 @@ def acquireZStack(wellID, subposition, timepoint):
 				 zStepSize)
 	
 	# Acquire fluo channel
-	myIM.acquire(2, 
+	myIM.acquire(objectiveIndex,
+				 2, 
 				 "100000", # use the 1st fluo light source, see the "LightSource" example script
 				 3, 
 				 70, 

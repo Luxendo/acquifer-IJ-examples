@@ -24,13 +24,17 @@ from acquifer.core import TcpIp
 
 myIM = TcpIp()
 
-myIM.setObjective(1)
 myIM.resetCamera() # use default setting, use setCamera functions to update ROI and/or binning
 
 # Update metadata fields such as wellID, subposition (within a given well), timepoint
 myIM.setMetadataWellId("C002") # this should be a 4-character string : a character and 3 digits 
 myIM.setMetadataSubposition(1) # to specify if we are acquiring subpositions within a well
 myIM.setMetadataTimepoint(1)   # for timelapse
+
+# Define objective that we will pass to the acquire commands
+# The objective index is between 1 and 4, with increasing magnifications
+# Typically the first objective (index 1) is the 2X
+objectiveIndex = 1
 
 # OPTION1 : acquire with full set of arguments including custom directory to save the images
 channelNumber = 1 # this is for filenaming (the CO tag)
@@ -49,7 +53,8 @@ lightConstantOn = False
 # if "" or None is passed as argument to acquire, the images are saved in the default project folder within a plate-specific directory (see below) 
 saveDirectory = r"C:\Users\Default\Desktop\MyDataset"
 
-myIM.acquire(channelNumber, 
+myIM.acquire(objectiveIndex,
+			 channelNumber, 
 			 lightSource, 
 			 detectionFilter, 
 			 intensity, 
@@ -91,7 +96,8 @@ zStepSize = 10 # µm
 
 # Acquire brightfield channel
 myIM.setMetadataWellId("A001")
-myIM.acquire(1, # here we set channel number for brightfield to 1, this defines the value for the tag "CO" in the filename
+myIM.acquire(objectiveIndex,
+			 1, # here we set channel number for brightfield to 1, this defines the value for the tag "CO" in the filename
 			 "brightfield", 
 			 detectionFilter,
 			 intensityBF, 
@@ -102,7 +108,8 @@ myIM.acquire(1, # here we set channel number for brightfield to 1, this defines 
 						# here we dont specify the output directory so images will be saved in the dfault projectDirectory/timestamp_plateID. lightConstantOn is not specified neither and default to False
 
 # Acquire fluo channel
-myIM.acquire(2, # here we set channel number for this fluo channel to 2, this defines the value for the tag "CO" in the filename
+myIM.acquire(objectiveIndex,
+			 2, # here we set channel number for this fluo channel to 2, this defines the value for the tag "CO" in the filename
 			 "100000", # use the 1st fluo light source, see the "LightSource" example script
 			 detectionFilter, 
 			 intensityFluo, 

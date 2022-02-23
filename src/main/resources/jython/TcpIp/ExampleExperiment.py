@@ -99,6 +99,12 @@ myIM.setMode("script")
 
 for timepoint in range(1, nTimepoints+1): # range is exclusive ie it will be from 1 to 3
 	
+	# Wait before next timepoint
+	if timepoint != 1: # does not wait after the last iteration
+		print "Waiting for", timeStep, "minutes"
+		TimeUnit.MINUTES.sleep(timeStep)
+		#TimeUnit.HOURS.sleep(timeStep) # use this one for hours
+	
 	print "Starting timepoint :", timepoint
 	
 	for well in listWell:
@@ -112,12 +118,7 @@ for timepoint in range(1, nTimepoints+1): # range is exclusive ie it will be fro
 		# Acquire 2nd subposition which is 2.5 mm apart from the center in X and Y
 		myIM.moveXYby(2.5, 2.5)
 		acquireZStack(well.ID, 2, timepoint)
-	
-	# Wait before next timepoint
-	TimeUnit.MINUTES.sleep(timeStep)
-	#TimeUnit.HOURS.sleep(timeStep) # use this one for hours
 
-	print "Waiting for", timeStep, "minutes"
 
 myIM.closeConnection()
 print "Done"

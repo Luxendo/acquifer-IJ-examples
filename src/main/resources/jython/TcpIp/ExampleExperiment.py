@@ -38,7 +38,7 @@ def acquireZStack(wellID, subposition, timepoint):
 	# Define objective used for AF and acquisition
 	# The objective index is between 1 and 4, with increasing magnifications
 	# Typically the first objective (index 1) is the 2X
-	objectiveIndex = 1
+	objectiveIndex = 2
 	
 	# Run the autofocus using the brightfield channel and 2x2 binning
 	myIM.setCameraBinning(2)
@@ -86,9 +86,6 @@ def acquireZStack(wellID, subposition, timepoint):
 
 # Start connection
 myIM = TcpIp()
-
-# Initial settings
-myIM.setObjective(3) # Use objective 3, which usually corresponds to the 10X
 
 # Set output directory
 myIM.setDefaultProjectFolder(project.getPath())

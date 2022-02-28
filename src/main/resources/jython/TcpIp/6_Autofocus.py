@@ -11,9 +11,12 @@ myIM = TcpIp() # open the communication port with the IM
 # SOFTWARE AUTOFOCUS
 """
 Software autofocus is run with the current camera settings.
-To use a different camera settings (ROI acquisition or binning), you would need to first call one of this function
+To use different camera settings (ROI acquisition or binning), you would need to first call one of these functions
+myIM.setCamera(x, y, width, height, binning)
+myIM.setCamera(x, y, width, height) # with default binning of 1
+myIM.setCameraBinning(factor)
 """
-#myIM.setCamera(x,y,width,height,binning)
+
 
 objective = 1      # Objective index, 1 is usually 2X
 lightSource = "bf" # as in setLightSource, here using brightfield, for fluo use a 6-digit code such as "001000" as in setFluoChannel 

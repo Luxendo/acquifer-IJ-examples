@@ -42,7 +42,7 @@ Thread.sleep(5000) # wait 5 secs, to leave the opportunity to see it
 
 ## OPTION 2 : Set the camera sensor area only, 
 # this command also resets the binning factor to its default value of 1
-myIM.setCameraSensorRegion(x, y, width, height)
+myIM.setCamera(x, y, width, height)
 Thread.sleep(5000) # wait 5 secs, to leave the opportunity to see it
 
 

@@ -35,7 +35,7 @@ The compilation will automatically put these script files in the jar, so they ca
 
 In the maven configuration define the following properties to have the jar automatically copied to the Fiji.app/jars directory (thanks to the parent scijava pom).  
 
-__Maven build parameters__ 
+__Maven build parameters__  
 scijava.app : Path to Fiji.app  
 enforcer.skip = true - this prevent issue since the package does not fullfill all requirements of the parent pom (licences..)  
 scijava.deleteOtherVersions = older  

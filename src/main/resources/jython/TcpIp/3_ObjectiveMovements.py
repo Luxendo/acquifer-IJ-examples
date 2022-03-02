@@ -39,5 +39,5 @@ Thread.sleep(5000) # wait 5 seconds before moving (so you can see it)
 print "Moving XYZ"
 myIM.moveXYZto(x,y,z)
 
-myIM.closeConnection()
+#myIM.closeConnection() # This would switch off light-sources and stop the camera preview. Commented by default but feel free to uncomment
 print "Done"

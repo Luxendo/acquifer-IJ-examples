@@ -42,9 +42,9 @@ lightSource = "brightfield"
 detectionFilter = 2 # between 1 and 4
 intensity = 50 # relative intensity of the lightsource in %
 exposure = 100 # exposure in ms
-zStackCenter = 18000 # in µm
+zStackCenter = 18000 # in micrometers
 nSlices = 20
-zStepSize = 10 # µm
+zStepSize = 10 # micrometers
 lightConstantOn = False
 
 # For saveDirectory we pass a raw string (r prefix) so that backslashes are not interpreted as special characters
@@ -90,9 +90,9 @@ intensityFluo = 80  # relative intensity of the lightsource in %
 exposureFluo  = 150 # exposure in ms
 
 # Stack settings (identical for brigtfield and fluo)
-zStackCenter = 18000 # in µm
+zStackCenter = 18000 # in micrometers
 nSlices = 20
-zStepSize = 10 # µm
+zStepSize = 10 # micrometers
 
 # Acquire brightfield channel
 myIM.setMetadataWellId("A001")

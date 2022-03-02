@@ -8,9 +8,9 @@ myIM = TcpIp() # open the communication port with the IM
 # Check temperature sensor values
 # There are 2 sensors, one for the ambiant temp, and one for the sample temp
 # Note : the prefix u before the string defines a unicode string to make sure the special character ° is displayed correctly 
-print u"\nAmbiant temperature (°C) : ", myIM.getTemperatureAmbiant();
-print u"Sample temperature (°C) : ",    myIM.getTemperatureSample();
-print u"Target Temperature (°C) : ",    myIM.getTemperatureTarget(); # that`s the user-defined temperature, either define in the GUI or with setTemperatureTarget 
+print "\nAmbiant temperature (Celsius) : ", myIM.getTemperatureAmbiant();
+print "Sample temperature (Celsius) : ",    myIM.getTemperatureSample();
+print "Target Temperature (Celsius) : ",    myIM.getTemperatureTarget(); # that`s the user-defined temperature, either define in the GUI or with setTemperatureTarget 
 print "Temperature regulation is on : ", myIM.isTemperatureRegulated();
 
 # Check the current objective
@@ -21,7 +21,7 @@ print "\nObjective index : ", myIM.getObjectiveIndex();
 # X,Y,Z-Position of the objective 
 print "\nX-position (mm) : ", myIM.getPositionX(); # mm
 print "Y-position (mm) : ",   myIM.getPositionY(); # mm
-print u"Z-position (µm) : ",  myIM.getPositionZ(); # µm !! different than X,Y !!
+print "Z-position (micrometers) : ",  myIM.getPositionZ(); # micrometers !! different than X,Y !!
 
 # Mode, either script/live
 # In live mode, any change is reflected directly in the IM software ex : switching on/off light sources

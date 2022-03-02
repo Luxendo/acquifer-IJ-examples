@@ -1,6 +1,6 @@
 """
 This scripts demonstrates how to activate temperature regulation externally.
-The target temperature for the sample can range between 18 to 34°C. 
+The target temperature for the sample can range between 18 to 34 degrees Celsius. 
 2 solutions are shown to start a script once the temperature has stabilize
 Option 1 : waiting for a fixed time interval before starting the script
 Option 2 : Actively checking the temperature regularly to know if it has reached the target value
@@ -14,8 +14,8 @@ myIM = TcpIp() # open the communication port with the IM
 # and wait for a few minutes that temperature is stable (half an hour would be a better value)
 targetTemp = 25.2
 margin = 0.5 # accept deviation from the target temperature 
-myIM.setTemperatureTarget(targetTemp)      # in °C with 1 decimal precision max
-myIM.setTemperatureRegulation(True)  # turn on the regulation
+myIM.setTemperatureTarget(targetTemp)  # in degrees Celsius with 1 decimal precision max
+myIM.setTemperatureRegulation(True)    # turn on the regulation
 
 
 # OPTION 1 : wait for a given number of minutes, to let time for the temperature to stabilize

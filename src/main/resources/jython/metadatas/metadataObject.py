@@ -37,5 +37,5 @@ print m4, "exists:", m4.exists()
 # One can recover any metadata contained in the filename, as with the MetadataParser
 # See the API documentation for a list of available functions
 # https://acquifer.github.io/acquifer-core/acquifer/core/im/Metadata.html
-print u"Pixels size (µm):", m1.getPixelSize()
+print "Pixels size (micrometers):", m1.getPixelSize()
 print "Z-Position (mm): ", m1.getZPosition()

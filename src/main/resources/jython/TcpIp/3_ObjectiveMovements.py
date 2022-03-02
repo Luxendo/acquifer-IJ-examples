@@ -26,7 +26,7 @@ Thread.sleep(5000) # wait 5 seconds before moving (so you can see it)
 myIM.moveXYby(10.2, -5.5) # Move by another 10.2 mm along x, move back by 5.5 mm along y
 
 # Move Z
-z = 456.1 # µm with max 1 decimal place
+z = 456.1 # micrometers with max 1 decimal place
 print "Moving Z"
 myIM.moveZto(z)
 print "Waiting 5 seconds before next move"

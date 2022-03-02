@@ -42,15 +42,15 @@ def acquireZStack(wellID, subposition, timepoint):
 	
 	# Run the autofocus using the brightfield channel and 2x2 binning
 	myIM.setCameraBinning(2)
-	zCenter = 19000 # for AF only, in µm 
+	zCenter = 19000 # for AF only, in micrometers 
 	zFocus = myIM.runSoftwareAutoFocus(objectiveIndex,
 										"bf",   # lightSource
 										2,     # detectionFilter 
 										80,    # intensity (%)
 										50,    # exposure (ms)
-										zCenter, # zStackCenter (µm)
+										zCenter, # zStackCenter (micrometers)
 										11,    # nSlices 
-										15)    # zStepSize (µm)
+										15)    # zStepSize (micrometers)
 	
 	# Reset camera binning to full resolution before acquiring
 	myIM.resetCamera()
@@ -59,7 +59,7 @@ def acquireZStack(wellID, subposition, timepoint):
 	# Important that both Z-stack have identical dimensions for both channels
 	# otherwise not possible to overlay the 2 channels ! 
 	nSlices = 21
-	zStepSize = 10 # µm
+	zStepSize = 10 # micrometers
 	
 	# Acquire 1st channel : brightfield
 	myIM.acquire(1, # channel number, for filenaming : tag "CO"

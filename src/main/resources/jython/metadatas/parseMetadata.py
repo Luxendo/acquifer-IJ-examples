@@ -43,4 +43,4 @@ print "Pixel Size (um): ", parser.getPixelSize(filename)
 
 print "Timepoint :", parser.getTimepoint(filename)
 
-print u"Temperature (°C)", parser.getTemperature(filename) # use unicode "u" string for special ° character
+print "Temperature (Celsius)", parser.getTemperature(filename) # use unicode "u" string for special ° character

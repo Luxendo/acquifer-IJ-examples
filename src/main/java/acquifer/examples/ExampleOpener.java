@@ -37,7 +37,8 @@ public class ExampleOpener implements PlugIn {
 			throw new IllegalArgumentException("Currently implemented only for .py and .ijm files");
 		}
 		
-		// Get the script editor
+		// Open a new instance of script editor
+		// when opening mutliple script over time would be nice to keep using the same instance
 		Context context = IJ1Helper.getLegacyContext();
 		TextEditor editor = new TextEditor(context);
 		editor.setVisible(true);
@@ -45,7 +46,8 @@ public class ExampleOpener implements PlugIn {
 		// Open a tab with the example
 		editor.newTab(IJ.openUrlAsString(url),
 					  language);
-				
+		
+		editor.setEditorPaneFileName( url.substring( url.lastIndexOf('/')+1 ) ); 
 	}
 
 }

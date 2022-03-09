@@ -38,7 +38,7 @@ public class ExampleOpener implements PlugIn {
 		}
 		
 		// Open a new instance of script editor
-		// when opening mutliple script over time would be nice to keep using the same instance
+		// when opening multiple scripts over time would be nice to keep using the same instance
 		Context context = IJ1Helper.getLegacyContext();
 		TextEditor editor = new TextEditor(context);
 		editor.setVisible(true);
@@ -47,7 +47,10 @@ public class ExampleOpener implements PlugIn {
 		editor.newTab(IJ.openUrlAsString(url),
 					  language);
 		
-		editor.setEditorPaneFileName( url.substring( url.lastIndexOf('/')+1 ) ); 
+		editor.setEditorPaneFileName( url.substring( url.lastIndexOf('/')+1 )
+														.replace("." + extension, "") ); // filename without extension
+		
+
 	}
 
 }

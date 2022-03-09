@@ -4,6 +4,9 @@ The target temperature for the sample can range between 18 to 34 degrees Celsius
 2 solutions are shown to start a script once the temperature has stabilize
 Option 1 : waiting for a fixed time interval before starting the script
 Option 2 : Actively checking the temperature regularly to know if it has reached the target value
+
+See the API documentation for the list of commands available by TcpIp and their docstrings. 
+https://acquifer.github.io/acquifer-core/acquifer/core/TcpIp.html
 """
 from acquifer.core import TcpIp
 from java.util.concurrent import TimeUnit

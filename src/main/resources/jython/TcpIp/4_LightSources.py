@@ -28,6 +28,9 @@ There is thus no need to send a switch-off command in this case.
 By default this option is set to false, meaning that the light is not constantly on but is rather synchronized with the camera exposure time.  
 This results in having the light-source blinking, hence reducing phototoxicity compared to having the light constantly on during the acquisition phases.
 However, if you want to avoid your sample being exposed to a flashing light, you can set this option lightConstantOn to true, and thus have a constant illumination during acquisition phase.
+
+See the API documentation for the list of commands available by TcpIp and their docstrings. 
+https://acquifer.github.io/acquifer-core/acquifer/core/TcpIp.html
 """
 from acquifer.core import TcpIp
 from java.lang import Thread

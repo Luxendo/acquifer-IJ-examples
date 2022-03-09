@@ -1,6 +1,9 @@
 """
 This script demonstrates how to actively control the Imaging Machine via an external application
 For instance to set a specific objective, and move it across the plate to a given X,Y,Z position.
+
+See the API documentation for the list of commands available by TcpIp and their docstrings. 
+https://acquifer.github.io/acquifer-core/acquifer/core/TcpIp.html
 """
 from acquifer.core import TcpIp
 from java.lang import Thread

@@ -1,6 +1,9 @@
 """
 This script demonstrate how to run autofocus via an external application like python.
 The runHardwareAutofocus / runSoftwareAutofocus commands can be called both in "live" and "script" mode.
+
+See the API documentation for the list of commands available by TcpIp and their docstrings. 
+https://acquifer.github.io/acquifer-core/acquifer/core/TcpIp.html
 """
 from acquifer.core import TcpIp
 from java.lang import Thread

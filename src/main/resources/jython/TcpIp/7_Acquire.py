@@ -19,6 +19,9 @@ The acquire commands always switches the software to script mode.
 If the software is in live mode before the acquire command is sent, the software will switch to script mode, acquire the images and return to live mode.
 Switching between script and live mode takes a few seconds. Therefore for successive acquire commands, it is advised to switch to script mode once for all, before calling the acquire command,
 using the setMode("script") command.
+
+See the API documentation for the list of commands available by TcpIp and their docstrings. 
+https://acquifer.github.io/acquifer-core/acquifer/core/TcpIp.html
 """
 from acquifer.core import TcpIp
 

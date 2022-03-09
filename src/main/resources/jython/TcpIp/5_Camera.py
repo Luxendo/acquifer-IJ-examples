@@ -18,6 +18,9 @@ Besides, using binning, the brightness of the grouped pixels are combined, there
 than the original full resolution image.
 
 The exposure time of the camera is set for each channel separately, with one of the following commands : setBrightfield, setFluoChannel or setLightSource.
+
+See the API documentation for the list of commands available by TcpIp and their docstrings. 
+https://acquifer.github.io/acquifer-core/acquifer/core/TcpIp.html
 """
 from acquifer.core import TcpIp
 from java.lang import Thread

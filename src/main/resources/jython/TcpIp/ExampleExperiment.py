@@ -2,6 +2,9 @@
 This is an example of realistic experiment running a timelapse acquisition from Fiji in the jython scripting language.
 It performs the imaging of Z-stacks with 2 channels (brightfield and a fluo channel) for multiple wells and subpositions within wells.
 Before each acquisition a software autofocus is run.
+
+See the API documentation for the list of commands available by TcpIp and their docstrings. 
+https://acquifer.github.io/acquifer-core/acquifer/core/TcpIp.html
 """
 #@ File (label="Project directory", style="directory") project
 #@ String (label="plate ID") plate_id

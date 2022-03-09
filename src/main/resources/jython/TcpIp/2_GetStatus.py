@@ -1,5 +1,8 @@
 """
 This scripts demonstrates a number of values which can be recovered from the Imaging Machine such as temperature, current axis position...
+
+See the API documentation for the list of commands available by TcpIp and their docstrings. 
+https://acquifer.github.io/acquifer-core/acquifer/core/TcpIp.html
 """
 from acquifer.core import TcpIp
 

@@ -5,6 +5,9 @@ This script could be adapted for robotic workflow for instance, where instead of
 
 The experiment file (.imsf) contains all the information to run the experiment (well coordinates, channels, camera settings, image directory)
 therefore no other command is usually needed in this scenario. 
+
+See the API documentation for the list of commands available by TcpIp and their docstrings. 
+https://acquifer.github.io/acquifer-core/acquifer/core/TcpIp.html
 """
 from acquifer.core import TcpIp
 from java.lang import Thread

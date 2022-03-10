@@ -1,8 +1,9 @@
 package acquifer.examples;
 
-import ij.IJ;
 import ij.plugin.PlugIn;
 import net.imagej.legacy.IJ1Helper;
+
+import java.net.URL;
 
 import org.scijava.Context;
 import org.scijava.ui.swing.script.TextEditor;
@@ -19,38 +20,14 @@ public class ExampleOpener implements PlugIn {
 	 */
 	@Override
 	public void run(String subPath) {
-		String url = getClass().getClassLoader().getResource(subPath).toString();
-		String extension = url.substring(url.lastIndexOf(".") + 1);
-		
-		String language;
-		switch(extension) {
-			
-		case("py"):
-			language = "python";
-			break;
-		
-		case("ijm"):
-			language = "IJ1 Macro";
-			break;
-		
-		default:
-			throw new IllegalArgumentException("Currently implemented only for .py and .ijm files");
-		}
+		URL url = getClass().getClassLoader().getResource(subPath);
 		
 		// Open a new instance of script editor
 		// when opening multiple scripts over time would be nice to keep using the same instance
 		Context context = IJ1Helper.getLegacyContext();
 		TextEditor editor = new TextEditor(context);
-		editor.setVisible(true);
-		
-		// Open a tab with the example
-		editor.newTab(IJ.openUrlAsString(url),
-					  language);
-		
-		editor.setEditorPaneFileName( url.substring( url.lastIndexOf('/')+1 )
-														.replace("." + extension, "") ); // filename without extension
-		
-
+		editor.loadTemplate(url); // name is not super adapted, not really a template, just loading from URL 
+		editor.setVisible(true);  // displays it once script is loaded only
 	}
 
 }

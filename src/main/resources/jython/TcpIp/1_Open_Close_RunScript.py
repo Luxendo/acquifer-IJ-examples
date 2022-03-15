@@ -11,22 +11,44 @@ https://acquifer.github.io/acquifer-core/acquifer/core/TcpIp.html
 """
 from acquifer.core import TcpIp
 from java.lang import Thread
+from fiji.util.gui import GenericDialogPlus
+from ij import IJ
 
-myIM = TcpIp() # open the communication port with the IM
+class DialogIM(GenericDialogPlus):
+	
+	LABEL_OPEN_CLOSE = "Open/Close lid"
+	
+	def __init__(self):
+		
+		super(DialogIM, self).__init__("IM control")
+		self.addFileField("Experiment file", "")
+		self.addButton(self.LABEL_OPEN_CLOSE, self) # add a button with the dialog itself as ActionListerner, ie the click action is delegated to the Dialog actionPerformed method
+		self.setOKLabel("Start")
+		self.im = TcpIp() # open the communication port with the IM
+	
+	def actionPerformed(self, event):
+		super(DialogIM, self).actionPerformed(event)
+		
+		label = event.getActionCommand()
+		
+		if label == self.LABEL_OPEN_CLOSE:
+			
+			if self.im.isLidOpened():
+				IJ.showStatus("Closing lid")
+				self.im.closeLid()
+			
+			else:
+				IJ.showStatus("Opening lid")
+				self.im.openLid()
+		
+		elif label == "Start":
+			IJ.showStatus("Starting experiment")
+			self.im.runScript(self.getNextString())
+			self.im.closeConnection()
+		
+		else:
+			pass
 
-myIM.openLid() 
-
-# Or commands for a robotic arm to put a new plate
-Thread.sleep(3000) # pause execution for 3 seconds
-
-myIM.closeLid()
-
-# Here we use a raw-string (prefixed with r), to prevent backslash to be interpreted as special character such as new line for \n
-# You dont need raw string if your path is using forward slash / or double back slash \\ as separator
-experimentPath = r"C:\Users\Admin\Example\myScript.imsf"
-myIM.runScript(experimentPath) # This will pause further code execution until the script is finished running
-
-# Just close the port once the script is finished, also switching off any light source if any
-myIM.closeConnection()
-print "Done"
-# You could even put some custom code here to send a mail notification once the experiment is over
+# Create an instance of the dialog and show it
+dialog = DialogIM()
+dialog.showDialog()

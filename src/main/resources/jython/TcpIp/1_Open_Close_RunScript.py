@@ -10,7 +10,6 @@ See the API documentation for the list of commands available by TcpIp and their 
 https://acquifer.github.io/acquifer-core/acquifer/core/TcpIp.html
 """
 from acquifer.core import TcpIp
-from java.lang import Thread
 from fiji.util.gui import GenericDialogPlus
 from ij import IJ
 

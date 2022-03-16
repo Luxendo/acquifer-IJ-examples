@@ -1,4 +1,9 @@
 """
+REQUIREMENTS
+- running the script on a control PC/HIVE connected to the IM
+- have the IM software opened in parallel of Fiji
+- the option "Block remote connection" of the IM software disabled in the admin panel (contact your system administrator or the acquifer support)
+
 This script demonstrates how to acquire images via the Java API from an external application. 
 By default the acquire command is designed for the acquisition of Z-stacks. Single images can also be acquired by specifying the number of slice to 1.
 For the acquire command, like for the autofocus command, the objective and camera settings are defined beforehand via the dedicated commands (see previous tutorial scripts).
@@ -25,7 +30,12 @@ https://acquifer.github.io/acquifer-core/acquifer/core/TcpIp.html
 """
 from acquifer.core import TcpIp
 
-myIM = TcpIp()
+try : 
+	myIM = TcpIp() # open the communication port with the IM
+
+except Error, error :
+	IJ.error(error.getMessage())
+	raise Exception(error) # still throw an error to interrupt code execution
 
 myIM.resetCamera() # use default setting, use setCamera functions to update ROI and/or binning
 

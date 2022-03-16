@@ -1,4 +1,9 @@
 """
+REQUIREMENTS
+- running the script on a control PC/HIVE connected to the IM
+- have the IM software opened in parallel of Fiji
+- the option "Block remote connection" of the IM software disabled in the admin panel (contact your system administrator or the acquifer support)
+
 This script demonstrates how to adjust camera settings via the java API for external control of the IM.
 In live mode, updating the camera parameters is directly reflected in the image-preview in the Imaging Machine software.
 The camera settings are typically set once and will apply for following commands acquire, runSoftwareAutofocus... 
@@ -25,7 +30,12 @@ https://acquifer.github.io/acquifer-core/acquifer/core/TcpIp.html
 from acquifer.core import TcpIp
 from java.lang import Thread
 
-myIM = TcpIp() # open the communication port with the IM
+try : 
+	myIM = TcpIp() # open the communication port with the IM
+
+except Error, error :
+	IJ.error(error.getMessage())
+	raise Exception(error) # still throw an error to interrupt code execution
 
 # Switch on the brightfield channel to activate an image-preview in the IM software
 myIM.setBrightField(1, 2, 50, 100)

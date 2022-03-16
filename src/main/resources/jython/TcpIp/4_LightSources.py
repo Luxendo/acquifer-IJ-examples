@@ -1,4 +1,9 @@
 """
+REQUIREMENTS
+- running the script on a control PC/HIVE connected to the IM
+- have the IM software opened in parallel of Fiji
+- the option "Block remote connection" of the IM software disabled in the admin panel (contact your system administrator or the acquifer support)
+
 This scripts demonstrates how to switch-on/off light sources.
 
 There 2 types of light sources in the IM :
@@ -35,7 +40,12 @@ https://acquifer.github.io/acquifer-core/acquifer/core/TcpIp.html
 from acquifer.core import TcpIp
 from java.lang import Thread
 
-myIM = TcpIp() # open the communication port with the IM
+try : 
+	myIM = TcpIp() # open the communication port with the IM
+
+except Error, error :
+	IJ.error(error.getMessage())
+	raise Exception(error) # still throw an error to interrupt code execution
 
 
 # Set Brightfield on/off

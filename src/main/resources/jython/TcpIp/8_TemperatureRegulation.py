@@ -1,4 +1,9 @@
 """
+REQUIREMENTS
+- running the script on a control PC/HIVE connected to the IM
+- have the IM software opened in parallel of Fiji
+- the option "Block remote connection" of the IM software disabled in the admin panel (contact your system administrator or the acquifer support)
+
 This scripts demonstrates how to activate temperature regulation externally.
 The target temperature for the sample can range between 18 to 34 degrees Celsius. 
 2 solutions are shown to start a script once the temperature has stabilize
@@ -11,7 +16,12 @@ https://acquifer.github.io/acquifer-core/acquifer/core/TcpIp.html
 from acquifer.core import TcpIp
 from java.util.concurrent import TimeUnit
 
-myIM = TcpIp() # open the communication port with the IM
+try : 
+	myIM = TcpIp() # open the communication port with the IM
+
+except Error, error :
+	IJ.error(error.getMessage())
+	raise Exception(error) # still throw an error to interrupt code execution
 
 # Define the target temperature for incubation, switch on regulation
 # and wait for a few minutes that temperature is stable (half an hour would be a better value)

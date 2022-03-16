@@ -1,4 +1,9 @@
 """
+REQUIREMENTS
+- running the script on a control PC/HIVE connected to the IM
+- have the IM software opened in parallel of Fiji
+- the option "Block remote connection" of the IM software disabled in the admin panel (contact your system administrator or the acquifer support)
+
 This scripts demonstrates a number of values which can be recovered from the Imaging Machine such as temperature, current axis position...
 
 See the API documentation for the list of commands available by TcpIp and their docstrings. 
@@ -6,7 +11,12 @@ https://acquifer.github.io/acquifer-core/acquifer/core/TcpIp.html
 """
 from acquifer.core import TcpIp
 
-myIM = TcpIp() # open the communication port with the IM
+try : 
+	myIM = TcpIp() # open the communication port with the IM
+
+except Error, error :
+	IJ.error(error.getMessage())
+	raise Exception(error) # still throw an error to interrupt code execution
 
 # Check temperature sensor values
 # There are 2 sensors, one for the ambiant temp, and one for the sample temp

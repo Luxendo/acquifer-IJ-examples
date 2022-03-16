@@ -1,4 +1,9 @@
 """
+REQUIREMENTS
+- running the script on a control PC/HIVE connected to the IM
+- have the IM software opened in parallel of Fiji
+- the option "Block remote connection" of the IM software disabled in the admin panel (contact your system administrator or the acquifer support)
+
 This is an example of realistic experiment running a timelapse acquisition from Fiji in the jython scripting language.
 It performs the imaging of Z-stacks with 2 channels (brightfield and a fluo channel) for multiple wells and subpositions within wells.
 Before each acquisition a software autofocus is run.
@@ -88,7 +93,13 @@ def acquireZStack(wellID, subposition, timepoint):
 
 
 # Start connection
-myIM = TcpIp()
+try : 
+	myIM = TcpIp() # open the communication port with the IM
+
+except Error, error :
+	IJ.error(error.getMessage())
+	raise Exception(error) # still throw an error to interrupt code execution
+
 
 # Set output directory
 myIM.setDefaultProjectFolder(project.getPath())

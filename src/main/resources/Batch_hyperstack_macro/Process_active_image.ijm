@@ -14,8 +14,8 @@
  
 // Activate batch mode (optional)
 // the batch mode is usually faster as it does not display intermediate images
-// To deactivate it add // before the line to comment it
-setBatchMode(true);
+// To activate it remove the // before the line
+//setBatchMode(true);
 
 originalTitle = getTitle(); // get the original image title before we duplicate
 

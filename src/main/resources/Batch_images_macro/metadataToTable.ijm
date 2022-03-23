@@ -21,7 +21,7 @@ newRowIndex = Table.size; // row index = table.size (because row indexes are 0-b
 Table.set("Filepath", newRowIndex, imagePath);
 Table.set("Well", newRowIndex, Ext.IM_getWellId(imageName));
 
-Ext.IM_getLoopIteration(imageName, timepoint); // the value is returned in the variable timepoint
+Ext.IM_getTimepoint(imageName, timepoint); // the value is returned in the variable timepoint
 Table.set("Timepoint", newRowIndex, timepoint);
 
 Ext.IM_getZSlice(imageName, slice);

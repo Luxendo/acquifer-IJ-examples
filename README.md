@@ -20,6 +20,7 @@ You can also __download single files__ by clicking the filename, then the "raw" 
 ## Documentation
 You can find more documentation about the different ressources used in these examples on the following pages:
 - [Metadata encoding](https://www.acquifer.de/metadata/) in image filenames
+- [List of ACQUIFER macro-functions](https://acquifer.github.io/acquifer-IJ/acquifer/ij/MacroFunction.html), also listed in the auto-completion panel in Fiji´s script editor
 - [Batch-processing plugins](https://www.acquifer.de/fiji-batch-plugins/)
 - [Processing individual image-files in batch](https://www.acquifer.de/batch-files/)
 - [Hyperstack plugins](https://www.acquifer.de/hyperstack-fiji-plugins/)

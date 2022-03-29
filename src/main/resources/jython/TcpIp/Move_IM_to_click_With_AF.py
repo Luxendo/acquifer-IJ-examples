@@ -25,6 +25,7 @@ Clicking in the low-mag image will thus give you an idea of the field of view wi
 """
 from java.awt.event import MouseListener
 from acquifer.core  import TcpIp
+from acquifer.core.im04 import MetadataParser
 from ij.gui import GenericDialog
 
 dico_lightsources = {"BF":"BF",
@@ -68,6 +69,7 @@ class ClickListener(MouseListener):
 		self.imageName = imp.getTitle()
 		self.width  = imp.getWidth()
 		self.height = imp.getHeight()
+		self.parser = MetadataParser.getInstance()
 	
 	def mouseClicked(self, mouseEvent):
 		"""Print to the console below the x,y coordinates relative to the canvas i.e same than ImageJ coordinates.""" 
@@ -82,7 +84,7 @@ class ClickListener(MouseListener):
 													   self.width,
 													   self.height)
 		print "x,y (mm):", x_mm, y_mm
-		z_mm = parser.getPositionZ(imageName)
+		z_mm = self.parser.getPositionZ(self.imageName)
 				
 		# Move to XYZ with the Z corresponding to the image
 		self.im.moveXYto(x_mm, y_mm)

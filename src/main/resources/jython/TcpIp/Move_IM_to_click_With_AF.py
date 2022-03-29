@@ -91,7 +91,7 @@ class ClickListener(MouseListener):
 		
 		if run_af:
 			# Run AF using Z of the image as center
-			zFocus = self.im.runSoftwareAutofocus(objective,
+			zFocus = self.im.runSoftwareAutoFocus(objective,
 												 dico_lightsources[lightsource], 
 												 detection_filter, 
 												 power, 

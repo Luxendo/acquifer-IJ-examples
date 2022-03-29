@@ -26,7 +26,9 @@ Clicking in the low-mag image will thus give you an idea of the field of view wi
 from java.awt.event import MouseListener
 from acquifer.core  import TcpIp
 from ij.gui import GenericDialog
-dico_lightsources = {"Fluo1":"100000",
+
+dico_lightsources = {"BF":"BF",
+					 "Fluo1":"100000",
 					 "Fluo2":"010000",
 					 "Fluo3":"001000",
 					 "Fluo4":"000100",

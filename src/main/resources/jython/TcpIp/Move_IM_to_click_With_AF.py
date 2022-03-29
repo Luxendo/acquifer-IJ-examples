@@ -1,4 +1,5 @@
-#@ ImagePlus active_imp#@ Boolean (label="Run software autofocus", value=True) run_af
+#@ ImagePlus active_imp
+#@ Boolean (label="Run software autofocus", value=True) run_af
 #@ String (visibility=MESSAGE, required=false, value="Clicking OK will add a click-listener to the active image.<br>Clicks on the image will move the current Imaging Machine objective to the XY clicked position, and run a software autofocus if selected.") doc
 #@ Boolean (label="Run software autofocus", value=True) run_af
 #@ Integer (label="Objective", min=1, max=4, step=1) objective

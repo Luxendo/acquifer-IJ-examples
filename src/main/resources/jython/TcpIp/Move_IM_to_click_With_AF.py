@@ -1,9 +1,8 @@
 #@ ImagePlus active_imp
-#@ Boolean (label="Run software autofocus", value=True) run_af
 #@ String (visibility=MESSAGE, required=false, value="Clicking OK will add a click-listener to the active image.<br>Clicks on the image will move the current Imaging Machine objective to the XY clicked position, and run a software autofocus if selected.") doc
 #@ Boolean (label="Run software autofocus", value=True) run_af
 #@ Integer (label="Objective", min=1, max=4, step=1) objective
-#@ String  (label="Light-source", choices={"BF", "Fluo1", "Fluo2", "Fluo3", "Fluo4", "Fluo5", "Fluo6"}) lightsource
+#@ String  (label="Light-source", choices={"BF", "Fluo1", "Fluo2", "Fluo3", "Fluo4", "Fluo5", "Fluo6"}) pseudo_lightsource
 #@ Integer (label="Detection filter", min=1, max=4, step=1) detection_filter
 #@ Integer (label="Power (%)", min=0, max=100, value=50) power
 #@ Integer (label="Exposure (ms)", min=0, value=50) exposure
@@ -84,23 +83,31 @@ class ClickListener(MouseListener):
 													   self.width,
 													   self.height)
 		print "x,y (mm):", x_mm, y_mm
-		z_mm = self.parser.getPositionZ(self.imageName)
+		z_um = self.parser.getPositionZ(self.imageName) * 1000 # convert to um
 				
 		# Move to XYZ with the Z corresponding to the image
 		self.im.moveXYto(x_mm, y_mm)
 		
 		if run_af:
+			
+			lightSource = dico_lightsources[pseudo_lightsource]
+			
 			# Run AF using Z of the image as center
 			zFocus = self.im.runSoftwareAutoFocus(objective,
-												 dico_lightsources[lightsource], 
+												 lightSource, 
 												 detection_filter, 
 												 power, 
 												 exposure, 
-												 z_mm,
+												 z_um, 
 												 nslices, 
 												 zstep)
-			self.im.moveZto(zFocus) # not sure this is needed, the AF might leave the objective axis to the most focused position
-		
+			print "Z-focus :", zFocus
+			
+			# Switch on light source used for AF (switched off after AF) and move to focused position
+			self.im.setLightSource(1, lightSource, detection_filter, power, exposure)
+			self.im.moveZto(zFocus) # move to focused position
+			
+			
 	
 	def mouseEntered(self, mouseEvent):
 		pass

@@ -1,9 +1,8 @@
 #@ ImagePlus active_imp
-#@ Boolean (label="Run software autofocus", value=True) run_af
 #@ String (visibility=MESSAGE, required=false, value="Clicking OK will add a click-listener to the active image.<br>Clicks on the image will move the current Imaging Machine objective to the XY clicked position, and run a software autofocus if selected.") doc
 #@ Boolean (label="Run software autofocus", value=True) run_af
 #@ String  (label="Objective", choices={"2X", "4X", "10X", "20X"}) objective
-#@ String  (label="Light-source", choices={"BF", "Fluo1", "Fluo2", "Fluo3", "Fluo4", "Fluo5", "Fluo6"}) lightsource
+#@ String  (label="Light-source", choices={"BF", "Fluo1", "Fluo2", "Fluo3", "Fluo4", "Fluo5", "Fluo6"}) pseudo_lightsource
 #@ Integer (label="Detection filter", min=1, max=4, step=1) detection_filter
 #@ Integer (label="Power (%)", min=0, max=100, value=50) power
 #@ Integer (label="Exposure (ms)", min=0, value=50) exposure
@@ -22,6 +21,8 @@ Only the XY position of the objective is updated, the Z-position is untouched so
 
 A possible use-case is to open a low magnification image (2/4X) and to use a higher magnification objective for preview in the IM software.
 Clicking in the low-mag image will thus give you an idea of the field of view with the higher resolution objective. 
+
+TODO update getPositionZ will be in um in next acquifer-core
 """
 from java.awt.event import MouseListener
 from acquifer.core  import TcpIp
@@ -36,9 +37,9 @@ dico_lightsources = {"BF":"BF",
 					 "Fluo5":"000010",
 					 "Fluo6":"000001"}
 dico_objectives = {"2X":1, 
-				  "4X":2,
-				  "10X":3,
-				  "20X":4}
+				   "4X":2,
+				   "10X":3,
+				   "20X":4}
 				
 class ClickListener(MouseListener):
 	"""
@@ -88,12 +89,15 @@ class ClickListener(MouseListener):
 													   self.width,
 													   self.height)
 		print "x,y (mm):", x_mm, y_mm
-		z_mm = self.parser.getPositionZ(self.imageName)
+		z_um = self.parser.getPositionZ(self.imageName) * 1000 # convert to um
 				
 		# Move to XYZ with the Z corresponding to the image
 		self.im.moveXYto(x_mm, y_mm)
 		
 		if run_af:
+			
+			lightSource = dico_lightsources[pseudo_lightsource]
+			
 			# Run AF using Z of the image as center
 			zFocus = self.im.runSoftwareAutoFocus(dico_objectives[objective],	
 												  dico_lightsources[lightsource], 
@@ -103,9 +107,13 @@ class ClickListener(MouseListener):
 												  z_mm,
 												  nslices, 
 												  zstep)
-			self.im.moveZto(zFocus) # not sure this is needed, the AF might leave the objective axis to the most focused position
+												  
+			print "Z-focus :", zFocus
+			
+			# Switch on light source used for AF (switched off after AF) and move to focused position
+			self.im.setLightSource(1, lightSource, detection_filter, power, exposure)
+			self.im.moveZto(zFocus) # move to focused position
 		
-	
 	def mouseEntered(self, mouseEvent):
 		pass
 	

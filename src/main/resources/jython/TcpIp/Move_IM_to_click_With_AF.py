@@ -2,7 +2,7 @@
 #@ Boolean (label="Run software autofocus", value=True) run_af
 #@ String (visibility=MESSAGE, required=false, value="Clicking OK will add a click-listener to the active image.<br>Clicks on the image will move the current Imaging Machine objective to the XY clicked position, and run a software autofocus if selected.") doc
 #@ Boolean (label="Run software autofocus", value=True) run_af
-#@ Integer (label="Objective", min=1, max=4, step=1) objective
+#@ String  (label="Objective", choices={"2X", "4X", "10X", "20X"}) objective
 #@ String  (label="Light-source", choices={"BF", "Fluo1", "Fluo2", "Fluo3", "Fluo4", "Fluo5", "Fluo6"}) lightsource
 #@ Integer (label="Detection filter", min=1, max=4, step=1) detection_filter
 #@ Integer (label="Power (%)", min=0, max=100, value=50) power
@@ -35,6 +35,10 @@ dico_lightsources = {"BF":"BF",
 					 "Fluo4":"000100",
 					 "Fluo5":"000010",
 					 "Fluo6":"000001"}
+dico_objectives = {"2X":1, 
+				  "4X":2,
+				  "10X":3,
+				  "20X":4}
 				
 class ClickListener(MouseListener):
 	"""
@@ -91,14 +95,14 @@ class ClickListener(MouseListener):
 		
 		if run_af:
 			# Run AF using Z of the image as center
-			zFocus = self.im.runSoftwareAutoFocus(objective,
-												 dico_lightsources[lightsource], 
-												 detection_filter, 
-												 power, 
-												 exposure, 
-												 z_mm,
-												 nslices, 
-												 zstep)
+			zFocus = self.im.runSoftwareAutoFocus(dico_objectives[objective],	
+												  dico_lightsources[lightsource], 
+												  detection_filter, 
+												  power, 
+												  exposure, 
+												  z_mm,
+												  nslices, 
+												  zstep)
 			self.im.moveZto(zFocus) # not sure this is needed, the AF might leave the objective axis to the most focused position
 		
 	

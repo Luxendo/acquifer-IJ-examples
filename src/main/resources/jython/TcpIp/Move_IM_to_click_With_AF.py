@@ -89,7 +89,7 @@ class ClickListener(MouseListener):
 													   self.width,
 													   self.height)
 		print "x,y (mm):", x_mm, y_mm
-		z_um = self.parser.getPositionZ(self.imageName) * 1000 # convert to um
+		z_um = self.parser.getPositionZ(self.imageName) # from acquifer-core 3.3.0 getPositionZ is in µm
 				
 		# Move to XYZ with the Z corresponding to the image
 		self.im.moveXYto(x_mm, y_mm)
@@ -104,7 +104,7 @@ class ClickListener(MouseListener):
 												  detection_filter, 
 												  power, 
 												  exposure, 
-												  z_mm,
+												  z_um,
 												  nslices, 
 												  zstep)
 												  

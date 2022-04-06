@@ -138,14 +138,14 @@ class ClickListener(MouseListener):
 						z_um,
 						nslices, 
 						zstep,
-						false,
+						False,
 						directory.getPath())
 								
 		# Back to live mode after acquisition
 		# Switch on light source 
 		self.im.setMode("live")
 		self.im.setLightSource(1, lightSource, detection_filter, power, exposure)
-		self.im.moveZto(zFocus) # move to focused position
+		self.im.moveZto(z_um) # move to focused position
 		
 	def mouseEntered(self, mouseEvent):
 		pass

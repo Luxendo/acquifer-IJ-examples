@@ -22,7 +22,13 @@ Only the XY position of the objective is updated, the Z-position is untouched so
 A possible use-case is to open a low magnification image (2/4X) and to use a higher magnification objective for preview in the IM software.
 Clicking in the low-mag image will thus give you an idea of the field of view with the higher resolution objective. 
 
+TODO turn into a ImageJ toolbar click tool (ie no need for  a custom listener, it would automatically get added to new images)
 TODO update getPositionZ will be in um in next acquifer-core
+TODO remove existing click listeners to avoid adding multiple time the listener
+TODO dont switch to live mode
+TODO add escape listener
+TODO add small GUI otherwise it feels nothing happens
+TODO documentation about multiple clicks in a row (just queueing)
 """
 from java.awt.event import MouseListener
 from acquifer.core  import TcpIp

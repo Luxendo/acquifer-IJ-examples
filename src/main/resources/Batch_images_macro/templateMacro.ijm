@@ -11,12 +11,15 @@
  */
 imagePath = getArgument();
 
-setBatchMode(true); // do not display images that will be opened, Comment this line with // to display images
+//setBatchMode(true); // In batch-mode, images are not displayed to speed up processing. Ucomment this line to activate the batch mode
 open(imagePath);     // if BatchMode is not set to true, this will display the image
 
 // Execute some commands ex: edge detection
+run("Mean...", "radius=2"); // smooth before edge detection to reduce noise
 run("Find Edges");
 run("Enhance Contrast", "saturated=0.35");
+
+wait(2000); // wait 2 secs before closing
 
 // Close image after execution (in batch mode, this frees the image memory)
 close("*"); // Comment this line with // to keep images opened (if batch mode is not true)

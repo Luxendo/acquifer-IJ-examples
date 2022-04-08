@@ -68,6 +68,11 @@ public class MoveIMToClick extends PlugInTool {
 	}
 	
 	@Override
+	public String getToolIcon() {
+		return "T1d15IT4d15M"; // IM font size 15, x = 1, y = 13 i.e d in hex, see https://imagej.nih.gov/ij/developer/macro/macros.html#icons
+	}
+	
+	@Override
 	public void showOptionsDialog() {
 		
 		GenericDialogPlus dialog = new GenericDialogPlus("IM Click control");

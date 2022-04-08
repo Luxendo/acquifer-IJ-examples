@@ -10,6 +10,7 @@ import acquifer.core.TcpIp;
 import acquifer.core.im04.MetadataParser;
 import fiji.util.gui.GenericDialogPlus;
 import ij.IJ;
+import ij.ImageJ;
 import ij.ImagePlus;
 import ij.gui.ImageCanvas;
 import ij.plugin.tool.PlugInTool;
@@ -56,6 +57,7 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 	private final String[] LIST_CHANNELS_ID = new String[] {"BF", "Fluo1", "Fluo2", "Fluo3", "Fluo4", "Fluo5", "Fluo6"};
 	private final String[] LIST_CHANNELS_CODE = new String[] {"BF", "100000", "010000", "001000", "000100", "000010", "000001"};
 	
+	
 	public MoveIMToClick(){
 		;
 	}
@@ -63,6 +65,11 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 	@Override
 	public void run(String arg) {
 		super.run(arg);
+		
+		// Try adding this plugin as a listener to the ImageJ window
+		ImageJ imageJ = IJ.getInstance();
+		imageJ.addKeyListener(this);
+		
 		try { 
 			im = new TcpIp(); // open the communication port with the IM
 		}
@@ -216,11 +223,16 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 	public void keyTyped(KeyEvent e) {
 		
 	}
-
+	
+	/** Does not work, this make the plugin a KeyListener but the listener would need to be linked to a canvas or a component accepting a KeyListener.*/
 	@Override
 	public void keyPressed(KeyEvent e) {
+		IJ.log("Pressed");
+		
 		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-			im.setMode("live");
+			//im.setMode("live");
+			//System.out.println("Print escape");
+			IJ.log("Pressed escape");
 			//e.consume(); // needed ?
 		}
 	}

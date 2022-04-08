@@ -2,6 +2,8 @@ package acquifer.examples;
 
 import java.awt.Font;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 
 import acquifer.core.TcpIp;
@@ -208,5 +210,24 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 			im.setLightSource(1, lightSource, detectionFilter, power, exposure);
 			im.moveZto(z_um); // move to focused position
 		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			im.setMode("live");
+			//e.consume(); // needed ?
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

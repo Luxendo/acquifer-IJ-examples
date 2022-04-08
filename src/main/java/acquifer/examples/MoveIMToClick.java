@@ -13,9 +13,14 @@ import ij.gui.ImageCanvas;
 import ij.plugin.tool.PlugInTool;
 
 /** This plugin is an ImageJ menu click tool, to direct the Imaging Machine to the clicked position in a previously acquired image and/or perform AF + acquisition. <br>
- * When executed via the menu (it is listed as another plugin in the ACQUIFER menu, see plugins.config), a new icon appears in the ImageJ toolbar. <br>
- * This plugin requires to have the IM connected to the pc and the IM software running. */
-public class MoveIMToClick extends PlugInTool {
+ * When executed via the menu (it is listed as another plugin in the ACQUIFER menu, see plugins.config), a new icon appears in the ImageJ toolbar, and get automatically activated. <br>
+ * Upon activation of the tool, a TcpIp connection to the IM is established.<br>
+ * With the tool selected, and an IM image opened in Fiji, clicking on the image will move the objective XY-position to the clicked position.<br>
+ * If selected in the tool configuration window (double-click on the tool icon), the click can also perform software autofocus and/or acquisition of a Z-stack.<br>
+ * The z-start for the autofocus is the image Z-position, same for the acquisition, except if autofocus is performed then the focus position is used for the z-center of the stack.<br>
+ * This plugin requires to have the IM connected to the pc and the IM software running. <br> 
+ * */
+public class MoveIMToClick extends PlugInTool implements KeyListener {
 	
 	private TcpIp im;
 	private MetadataParser parser;

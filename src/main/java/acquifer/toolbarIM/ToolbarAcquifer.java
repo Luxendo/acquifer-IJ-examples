@@ -1,4 +1,4 @@
-package acquifer.examples;
+package acquifer.toolbarIM;
 
 import acquifer.core.TcpIp;
 import ij.IJ;

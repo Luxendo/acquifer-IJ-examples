@@ -1,4 +1,4 @@
-package acquifer.examples;
+package acquifer.toolbarIM;
 
 import java.awt.event.MouseEvent;
 

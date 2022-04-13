@@ -129,17 +129,17 @@ class ClickListener(MouseListener):
 		
 		# Acquire
 		self.im.setMetadataWellId(self.parser.getWellId(self.imageName))
-		self.im.acquire(1,
-						objective, 
-						lightSource, 
-						detection_filter, 
-						power, 
-						exposure, 
-						z_um,
-						nslices, 
-						zstep,
-						False,
-						directory.getPath())
+		self.im.acquireZstack(1,
+							objective, 
+							lightSource, 
+							detection_filter, 
+							power, 
+							exposure, 
+							z_um,
+							nslices, 
+							zstep,
+							False,
+							directory.getPath())
 								
 		# Back to live mode after acquisition
 		# Switch on light source 

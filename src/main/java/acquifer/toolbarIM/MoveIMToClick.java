@@ -194,7 +194,7 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 			// Acquire
 			im.setMode("script"); // script mode before AF and acquisition
 			im.setMetadataWellId(parser.getWellId(imageName));
-			im.acquire(1,
+			im.acquireZstack(1,
 					   objectiveIndex, 
 					   lightSource, 
 					   detectionFilter, 

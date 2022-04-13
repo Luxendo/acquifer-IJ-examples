@@ -31,7 +31,7 @@ nTimepoints = 3
 timeStep    = 1 # minutes
 
 
-def acquireZStack(wellID, subposition, timepoint):
+def acquireStack(wellID, subposition, timepoint):
 	"""
 	This custom utility function performs the Z-stack acquisition for both channels.
 	It first runs a software autofocus using 2x2 binning then acquiring the images with full-resolution for the 2 channels
@@ -70,26 +70,26 @@ def acquireZStack(wellID, subposition, timepoint):
 	zStepSize = 10 # micrometers
 	
 	# Acquire 1st channel : brightfield
-	myIM.acquire(1, # channel number, for filenaming : tag "CO"
-				 objectiveIndex,
-				 "brightfield", # lightSource
-				 2,             # detectionFilter
-				 80,            # intensity (%) 
-				 100,           # exposure (ms)
-				 zFocus,        # z-stack center 
-				 nSlices, 
-				 zStepSize)
+	myIM.acquireZstack(1, # channel number, for filenaming : tag "CO"
+						 objectiveIndex,
+						 "brightfield", # lightSource
+						 2,             # detectionFilter
+						 80,            # intensity (%) 
+						 100,           # exposure (ms)
+						 zFocus,        # z-stack center 
+						 nSlices, 
+						 zStepSize)
 	
 	# Acquire fluo channel
-	myIM.acquire(2,
-				 objectiveIndex,
-				 "100000", # use the 1st fluo light source, see the "LightSource" example script
-				 3, 
-				 70, 
-				 120, 
-				 zFocus,
-				 nSlices, 
-				 zStepSize)
+	myIM.acquireZstack(2,
+						 objectiveIndex,
+						 "100000", # use the 1st fluo light source, see the "LightSource" example script
+						 3, 
+						 70, 
+						 120, 
+						 zFocus,
+						 nSlices, 
+						 zStepSize)
 
 
 # Start connection
@@ -124,11 +124,11 @@ for timepoint in range(1, nTimepoints+1): # range is exclusive ie it will be fro
 		
 		# Acquire 1st subposition
 		myIM.moveXYto(well.X, well.Y)
-		acquireZStack(well.ID, 1, timepoint)
+		acquireStack(well.ID, 1, timepoint)
 		
 		# Acquire 2nd subposition which is 2.5 mm apart from the center in X and Y
 		myIM.moveXYby(2.5, 2.5)
-		acquireZStack(well.ID, 2, timepoint)
+		acquireStack(well.ID, 2, timepoint)
 
 
 myIM.closeConnection()

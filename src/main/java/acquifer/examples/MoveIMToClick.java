@@ -169,9 +169,7 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 		double z_um = parser.getPositionZ(imageName); // acquifer-core >= 3.3.0 getPositionZ is in µm 
 		
 		// Move to XY
-		im.moveXYto(xy_mm[0], xy_mm[1]);
-		im.setMode("script"); // script mode before AF and acquisition
-		
+		im.moveXYto(xy_mm[0], xy_mm[1]);		
 		
 		String lightSource = LIST_CHANNELS_CODE[selectedChannel];
 		
@@ -192,7 +190,9 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 		}
 		
 		if (doAcquisition) {
+			
 			// Acquire
+			im.setMode("script"); // script mode before AF and acquisition
 			im.setMetadataWellId(parser.getWellId(imageName));
 			im.acquire(1,
 					   objectiveIndex, 

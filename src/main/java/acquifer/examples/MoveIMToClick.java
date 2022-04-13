@@ -57,28 +57,25 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 	private final String[] LIST_CHANNELS_ID = new String[] {"BF", "Fluo1", "Fluo2", "Fluo3", "Fluo4", "Fluo5", "Fluo6"};
 	private final String[] LIST_CHANNELS_CODE = new String[] {"BF", "100000", "010000", "001000", "000100", "000010", "000001"};
 	
-	
-	public MoveIMToClick(){
-		;
-	}
-	
-	@Override
-	public void run(String arg) {
-		super.run(arg);
+	/** Constructor called by the ToolbarAcquifer passing the newly created connection to the IM. */
+	public MoveIMToClick(TcpIp im){
+		this.im = im;
+		parser = MetadataParser.getInstance();
 		
 		// Try adding this plugin as a listener to the ImageJ window
 		ImageJ imageJ = IJ.getInstance();
 		imageJ.addKeyListener(this);
-		
-		try { 
-			im = new TcpIp(); // open the communication port with the IM
-		}
-		
-		catch (Exception error) {
-			IJ.error(error.getMessage());
-			//throw new Exception(error); // still throw an error to interrupt code execution
-		}
-		parser = MetadataParser.getInstance();
+	}
+	
+	/** This is called when the plugin is run from the menu but it does not seem to be called when the tool is selected in the toolbar. */
+	@Override
+	public void run(String arg) {
+		super.run(arg);
+	}
+	
+	@Override
+	public String getToolName() {
+		return "Move objective to clicked coordinates";
 	}
 	
 	@Override
@@ -168,8 +165,8 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 		
 		
 		// Extract Z and well ID from imageName
-		double z_um = parser.getPositionZ(imageName) * 1000; //  before acquifer-core 3.3.0, return in mm
-		// double z_um = parser.getPositionZ(imageName); // TODO update for acquifer-core 3.3.0 getPositionZ is in µm 
+		//double z_um = parser.getPositionZ(imageName) * 1000; //  before acquifer-core 3.3.0, return in mm
+		double z_um = parser.getPositionZ(imageName); // acquifer-core >= 3.3.0 getPositionZ is in µm 
 		
 		// Move to XY
 		im.moveXYto(xy_mm[0], xy_mm[1]);

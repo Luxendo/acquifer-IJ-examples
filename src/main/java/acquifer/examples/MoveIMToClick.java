@@ -51,7 +51,7 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 	private String outputDir; 
 	
 	/** Go back to live mode after acquisition. This should be deactivated for successive clicks. */
-	private boolean backToLive;
+	private boolean backToLive = true;
 
 	private final String[] LIST_OBJECTIVES = new String[] {"2x", "4x", "10x", "20x"};
 	private final String[] LIST_CHANNELS_ID = new String[] {"BF", "Fluo1", "Fluo2", "Fluo3", "Fluo4", "Fluo5", "Fluo6"};

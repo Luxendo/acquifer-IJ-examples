@@ -173,6 +173,13 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 		
 		String lightSource = LIST_CHANNELS_CODE[selectedChannel];
 		
+		if (doAcquisition) {
+			im.setMode("script"); // script mode before AF and acquisition
+			// since the same objective is used for AF and autofocus
+			// switching before to script avoid the "objective reset" when switching between live/script
+
+		}
+		
 		if (doAF) {
 			
 			// Overwrite z_um with zFocus
@@ -187,12 +194,16 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 										   dZ_AF);
 												  
 			// print "Z-focus :", z_um
-		}
+			
+			// if not acquiring show the focused position
+			if (!doAcquisition) 
+				previewAtPosition(z_um, lightSource);
+			}
+		
 		
 		if (doAcquisition) {
 			
 			// Acquire
-			im.setMode("script"); // script mode before AF and acquisition
 			im.setMetadataWellId(parser.getWellId(imageName));
 			im.acquireZstack(1,
 					   objectiveIndex, 
@@ -205,15 +216,17 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 					   dZ,
 					   false, // lightConstant
 					   outputDir);
+			
+			if (backToLive) 
+				previewAtPosition(z_um, lightSource);
 		}
-		
-		if (backToLive) {
-			// Back to live mode after acquisition
-			// Switch on light source 
-			im.setMode("live");
-			im.setLightSource(1, lightSource, detectionFilter, power, exposure);
-			im.moveZto(z_um); // move to focused position
-		}
+	}
+	
+	/** Switch back to live mode if not already the case, activate light source and move to Z. */
+	public void previewAtPosition(double z_um, String lightSource) {
+		im.setMode("live");
+		im.setLightSource(1, lightSource, detectionFilter, power, exposure);
+		im.moveZto(z_um); // move to focused position
 	}
 
 	@Override

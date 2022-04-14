@@ -31,7 +31,7 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 	/** 1-based index of the objective in the IM-system */
 	private int objectiveIndex = 1;
 	private int selectedChannel = 0; // 0-based -> retrieve label and code via the LIST_CHANNELS  
-	private int detectionFilter = 1; 
+	private int detectionFilterIndex = 0; 
 	
 	private boolean doAF;
 	private int powerAF = 50;
@@ -56,7 +56,7 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 	private final String[] LIST_OBJECTIVES = new String[] {"2x", "4x", "10x", "20x"};
 	private final String[] LIST_CHANNELS_ID = new String[] {"BF", "Fluo1", "Fluo2", "Fluo3", "Fluo4", "Fluo5", "Fluo6"};
 	private final String[] LIST_CHANNELS_CODE = new String[] {"BF", "100000", "010000", "001000", "000100", "000010", "000001"};
-	
+	private final String[] LIST_FILTERS = new String[]{"1", "2","3","4","5"};
 	/** Constructor called by the ToolbarAcquifer passing the newly created connection to the IM. */
 	public MoveIMToClick(TcpIp im){
 		this.im = im;
@@ -89,7 +89,7 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 		GenericDialogPlus dialog = new GenericDialogPlus("IM Click control");
 		dialog.addChoice("Objective", LIST_OBJECTIVES, LIST_OBJECTIVES[objectiveIndex-1]); // -1 since ObjectiveIndex is 1-based
 		dialog.addChoice("Channel", LIST_CHANNELS_ID, LIST_CHANNELS_ID[selectedChannel]);
-		dialog.addNumericField("Detection filter", detectionFilter);
+		dialog.addChoice("Detection filter", LIST_FILTERS, LIST_FILTERS[detectionFilterIndex]);
 		
 		dialog.addMessage("Autofocus settings", dialog.getFont().deriveFont(Font.BOLD));
 		dialog.addCheckbox("Run software autofocus", doAF);
@@ -116,7 +116,7 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 			
 			objectiveIndex = dialog.getNextChoiceIndex() + 1;
 			selectedChannel = dialog.getNextChoiceIndex();
-			detectionFilter = (int) dialog.getNextNumber(); // TODO should check in range
+			detectionFilterIndex = dialog.getNextChoiceIndex();
 			
 			// AF settings
 			doAF = dialog.getNextBoolean();
@@ -186,7 +186,7 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 			// Run AF using Z of the image as center
 			z_um = im.runSoftwareAutoFocus(objectiveIndex,	
 										   lightSource, 
-										   detectionFilter, 
+										   detectionFilterIndex + 1, // filter index is 0-based 
 										   powerAF, 
 										   exposureAF, 
 										   z_um,
@@ -208,7 +208,7 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 			im.acquireZstack(1,
 					   objectiveIndex, 
 					   lightSource, 
-					   detectionFilter, 
+					   detectionFilterIndex + 1, // filter index is 0-based 
 					   power, 
 					   exposure, 
 					   z_um,
@@ -225,7 +225,7 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 	/** Switch back to live mode if not already the case, activate light source and move to Z. */
 	public void previewAtPosition(double z_um, String lightSource) {
 		im.setMode("live");
-		im.setLightSource(1, lightSource, detectionFilter, power, exposure);
+		im.setLightSource(1, lightSource, detectionFilterIndex+1, power, exposure);
 		im.moveZto(z_um); // move to focused position
 	}
 

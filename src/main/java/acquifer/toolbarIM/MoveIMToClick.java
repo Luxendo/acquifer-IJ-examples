@@ -224,16 +224,16 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 			// Acquire
 			im.setMetadataWellId(parser.getWellId(imageName));
 			im.acquireZstack(1,
-					   objectiveIndex, 
-					   lightSource, 
-					   detectionFilterIndex + 1, // filter index is 0-based 
-					   power, 
-					   exposure, 
-					   z_um,
-					   nSlices, 
-					   dZ,
-					   false, // lightConstant
-					   saveDir);
+							 objectiveIndex, 
+							 lightSource, 
+							 detectionFilterIndex + 1, // filter index is 0-based 
+							 power, 
+							 exposure, 
+							 z_um,
+							 nSlices, 
+							 dZ,
+							 false, // lightConstant
+							 saveDir);
 			
 			if (backToLive) 
 				previewAtPosition(z_um, lightSource);

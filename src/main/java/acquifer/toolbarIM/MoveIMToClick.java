@@ -10,6 +10,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import ij.Prefs;
+
 import acquifer.core.TcpIp;
 import acquifer.core.im04.MetadataParser;
 import fiji.util.gui.GenericDialogPlus;
@@ -52,7 +54,8 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 	
 	/** Distance between slices in µm with 0.1 precision. */
 	private double dZ = 10;
-	private String outputDir; 
+	private String outputDir = Prefs.get("click.outputDir", 
+										  Paths.get(IJ.getDirectory("home"), "ACQUIFER_ClickTool").toString()); 
 	
 	/** Go back to live mode after acquisition. This should be deactivated for successive clicks. */
 	private boolean backToLive = true;
@@ -61,6 +64,7 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 	private final String[] LIST_CHANNELS_ID = new String[] {"BF", "Fluo1", "Fluo2", "Fluo3", "Fluo4", "Fluo5", "Fluo6"};
 	private final String[] LIST_CHANNELS_CODE = new String[] {"BF", "100000", "010000", "001000", "000100", "000010", "000001"};
 	private final String[] LIST_FILTERS = new String[]{"1", "2","3","4","5"};
+	
 	/** Constructor called by the ToolbarAcquifer passing the newly created connection to the IM. */
 	public MoveIMToClick(TcpIp im){
 		this.im = im;
@@ -137,6 +141,8 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 			dZ = dialog.getNextNumber();
 			outputDir = dialog.getNextString();	
 			backToLive = dialog.getNextBoolean();
+			
+			Prefs.set("click.outputDir", outputDir);
 		}
 	}
 	

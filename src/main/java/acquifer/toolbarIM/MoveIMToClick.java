@@ -5,6 +5,10 @@ import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
+import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import acquifer.core.TcpIp;
 import acquifer.core.im04.MetadataParser;
@@ -203,6 +207,10 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 		
 		if (doAcquisition) {
 			
+			// Make a unique subdirectory with a timestamp
+			DateFormat df = new SimpleDateFormat("yyyyMMdd_hhmmss"); // add S if you need milliseconds
+			String saveDir = Paths.get(outputDir, df.format(new Date())).toString();
+			
 			// Acquire
 			im.setMetadataWellId(parser.getWellId(imageName));
 			im.acquireZstack(1,
@@ -215,7 +223,7 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 					   nSlices, 
 					   dZ,
 					   false, // lightConstant
-					   outputDir);
+					   saveDir);
 			
 			if (backToLive) 
 				previewAtPosition(z_um, lightSource);

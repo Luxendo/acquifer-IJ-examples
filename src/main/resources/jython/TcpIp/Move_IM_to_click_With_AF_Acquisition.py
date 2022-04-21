@@ -102,8 +102,8 @@ class ClickListener(MouseListener):
 		print "x,y (mm):", x_mm, y_mm
 		
 		# Extract Z and well ID from imageName
-		z_um = self.parser.getPositionZ(self.imageName) * 1000 #  before acquifer-core 3.3.0, return in mm
-		#z_um = self.parser.getPositionZ(self.imageName) # after acquifer-core 3.3.0 getPositionZ is in µm 
+		#z_um = self.parser.getPositionZ(self.imageName) * 1000 #  before acquifer-core 3.3.0, return in mm
+		z_um = self.parser.getPositionZ(self.imageName) # after acquifer-core 3.3.0 getPositionZ is in µm 
 		
 		# Move to XYZ with the Z corresponding to the image
 		self.im.moveXYto(x_mm, y_mm)

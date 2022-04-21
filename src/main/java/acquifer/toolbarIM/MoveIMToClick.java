@@ -179,6 +179,7 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 		double z_um = parser.getPositionZ(imageName); // acquifer-core >= 3.3.0 getPositionZ is in µm 
 		
 		// Move to XY
+		IJ.log("\nMoving objective along XY");
 		im.moveXYto(xy_mm[0], xy_mm[1]);		
 		
 		String lightSource = LIST_CHANNELS_CODE[selectedChannel];
@@ -192,6 +193,7 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 		
 		if (doAF) {
 			
+			IJ.log("Running Autofocus");
 			// Overwrite z_um with zFocus
 			// Run AF using Z of the image as center
 			z_um = im.runSoftwareAutoFocus(objectiveIndex,	
@@ -216,6 +218,8 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 			// Make a unique subdirectory with a timestamp
 			DateFormat df = new SimpleDateFormat("yyyyMMdd_hhmmss"); // add S if you need milliseconds
 			String saveDir = Paths.get(outputDir, df.format(new Date())).toString();
+			IJ.log("Acquire and save images in:");
+			IJ.log(saveDir);
 			
 			// Acquire
 			im.setMetadataWellId(parser.getWellId(imageName));

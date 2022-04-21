@@ -37,8 +37,8 @@ print("Well index (order of acquisition) : ", well_index);
 Ext.IM_getPositionXY(image_name, x_mm, y_mm);
 print("Positions (mm) X: ", x_mm, " Y: ", y_mm);
 
-Ext.IM_getPositionZ(image_name, z_µm);
-print("Position Z (µm) : ", z_µm);
+Ext.IM_getPositionZ(image_name, z_um);
+print("Position Z (micrometers) : ", z_um);
 
 Ext.IM_getZSlice(image_name, z_slice);
 print("Z-slice : ", z_slice);

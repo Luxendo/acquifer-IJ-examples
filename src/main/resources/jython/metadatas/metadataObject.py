@@ -38,4 +38,4 @@ print m4, "exists:", m4.exists()
 # See the API documentation for a list of available functions
 # https://acquifer.github.io/acquifer-core/acquifer/core/im/Metadata.html
 print "Pixels size (micrometers):", m1.getPixelSize()
-print "Z-Position (mm): ", m1.getPositionZ()
+print "Z-Position (micrometers): ", m1.getPositionZ()

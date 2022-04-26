@@ -82,6 +82,7 @@ myIM.acquireZstack(channelNumber,
 				 lightConstantOn, 
 				 saveDirectory)
 
+print "Saved images in ", saveDirectory
 
 
 # OPTION2 : Using default project folder and plate ID
@@ -89,7 +90,8 @@ myIM.acquireZstack(channelNumber,
 #
 # This will assure the following acquire commands are saved in the same subdirectory
 # Indeed when switching to script mode, a timestamp is created that is used as part of the plate directory
-myIM.setDefaultProjectFolder(os.path.join(directory, "defaultProjectDirectory" ))
+projectDir = os.path.join(directory, "defaultProjectDirectory" )
+myIM.setDefaultProjectFolder(projectDir)
 myIM.setPlateId("myPlate")
 
 # Switch to script mode before calling successive acquire commands
@@ -136,6 +138,8 @@ myIM.acquireZstack(2, # here we set channel number for this fluo channel to 2, t
 				 zStepSize,
 				 True, # here we specifiy lightConstantOn to true, so fluo light source is not blinking 
 				 None) # set the saveDirectory to None, in this case the images are saved to the default project directory as above
+
+print "Saved images in subdirectory of", projectDir
 
 myIM.closeConnection() # closing the connection will automatically switch back to live mode
 print "Done"

@@ -188,7 +188,7 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 		if (doAcquisition) {
 			im.setMode("script"); // script mode before AF and acquisition
 			// since the same objective is used for AF and autofocus
-			// switching before to script avoid the "objective reset" when switching between live/script
+			// when coming from live mode avoid "objective reset" that would otherwise happen after AF, when switching to script mode before acquisition
 
 		}
 		

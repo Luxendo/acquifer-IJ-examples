@@ -178,8 +178,14 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 		//double z_um = parser.getPositionZ(imageName) * 1000; //  before acquifer-core 3.3.0, return in mm
 		double z_um = parser.getPositionZ(imageName); // acquifer-core >= 3.3.0 getPositionZ is in µm 
 		
+		// Set selected objective 
+		// if no AF nor acquisition need to be done manually
+		if (!doAF && !doAcquisition) {
+			im.setObjective(objectiveIndex);
+		}
+		
 		// Move to XY
-		IJ.log("\nMoving objective along XY");
+		IJ.log("\nMoving objective to clicked XY position, and Z-position of original image");
 		//im.moveXYto(xy_mm[0], xy_mm[1]);		
 		im.moveXYZto(xy_mm[0], xy_mm[1], z_um); // also move Z
 		
@@ -236,7 +242,7 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 							 false, // lightConstant
 							 saveDir);
 			
-			if (backToLive) 
+			if (backToLive) // only needed for acquisition which requires the script mode
 				previewAtPosition(z_um, lightSource);
 		}
 	}

@@ -180,7 +180,8 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 		
 		// Move to XY
 		IJ.log("\nMoving objective along XY");
-		im.moveXYto(xy_mm[0], xy_mm[1]);		
+		//im.moveXYto(xy_mm[0], xy_mm[1]);		
+		im.moveXYZto(xy_mm[0], xy_mm[1], z_um); // also move Z
 		
 		String lightSource = LIST_CHANNELS_CODE[selectedChannel];
 		

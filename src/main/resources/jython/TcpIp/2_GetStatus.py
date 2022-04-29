@@ -19,9 +19,9 @@ except Error, error :
 	raise Exception(error) # still throw an error to interrupt code execution
 
 # Check temperature sensor values
-# There are 2 sensors, one for the ambiant temp, and one for the sample temp
+# There are 2 sensors, one for the ambient temp, and one for the sample temp
 # Note : the prefix u before the string defines a unicode string to make sure the special character ° is displayed correctly 
-print "\nAmbiant temperature (Celsius) : ", myIM.getTemperatureAmbiant();
+print "\nAmbient temperature (Celsius) : ", myIM.getTemperatureAmbient();
 print "Sample temperature (Celsius) : ",    myIM.getTemperatureSample();
 print "Target Temperature (Celsius) : ",    myIM.getTemperatureTarget(); # that`s the user-defined temperature, either define in the GUI or with setTemperatureTarget 
 print "Temperature regulation is on : ", myIM.isTemperatureRegulated();

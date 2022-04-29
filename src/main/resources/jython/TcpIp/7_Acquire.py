@@ -70,19 +70,19 @@ lightConstantOn = False
 # if the directory does not exist, it is automatically created
 # if "" or None is passed as argument to acquire, the images are saved in the default project folder within a plate-specific directory (see below) 
 saveDirectory = os.path.join(directory, "customDirectory")
-myIM.acquireZstack(channelNumber,
-				 objectiveIndex, 
-				 lightSource, 
-				 detectionFilter, 
-				 intensity, 
-				 exposure, 
-				 zStackCenter,
-				 nSlices, 
-				 zStepSize, 
-				 lightConstantOn, 
-				 saveDirectory)
+outputDir = myIM.acquireZstack(channelNumber,
+							   objectiveIndex, 
+							   lightSource, 
+							   detectionFilter, 
+							   intensity, 
+							   exposure, 
+							   zStackCenter,
+							   nSlices, 
+							   zStepSize, 
+							   lightConstantOn, 
+							   saveDirectory)
 
-print "Saved images in ", saveDirectory
+print "Saved images in :", saveDirectory
 
 
 # OPTION2 : Using default project folder and plate ID
@@ -114,32 +114,34 @@ nSlices = 20
 zStepSize = 10 # micrometers
 
 # Acquire brightfield channel
+# here we dont specify the output directory, so images will be saved in the default projectDirectory/timestamp_plateID
+# The exact path of the output directory is returned by the command 
+# lightConstantOn is not specified neither and default to False
 myIM.setMetadataWellId("A001")
-myIM.acquireZstack(1, # here we set channel number for brightfield to 1, this defines the value for the tag "CO" in the filename
-				 objectiveIndex,
-				 "brightfield", 
-				 detectionFilter,
-				 intensityBF, 
-				 exposureBF, 
-				 zStackCenter, 
-				 nSlices, 
-				 zStepSize) # here we set channel number for brightfield to 1
-							# here we dont specify the output directory so images will be saved in the dfault projectDirectory/timestamp_plateID. lightConstantOn is not specified neither and default to False
+outDirectory = myIM.acquireZstack(1, # here we set channel number for brightfield to 1, this defines the value for the tag "CO" in the filename
+								objectiveIndex,
+								"brightfield", 
+								detectionFilter,
+								intensityBF, 
+								exposureBF, 
+								zStackCenter, 
+								nSlices, 
+								zStepSize) 
 
 # Acquire fluo channel
-myIM.acquireZstack(2, # here we set channel number for this fluo channel to 2, this defines the value for the tag "CO" in the filename
-				 objectiveIndex,
-				 "100000", # use the 1st fluo light source, see the "LightSource" example script
-				 detectionFilter, 
-				 intensityFluo, 
-				 exposureFluo, 
-				 zStackCenter,
-				 nSlices, 
-				 zStepSize,
-				 True, # here we specifiy lightConstantOn to true, so fluo light source is not blinking 
-				 None) # set the saveDirectory to None, in this case the images are saved to the default project directory as above
+outDirectory = myIM.acquireZstack(2, # here we set channel number for this fluo channel to 2, this defines the value for the tag "CO" in the filename
+								objectiveIndex,
+								"100000", # use the 1st fluo light source, see the "LightSource" example script
+								detectionFilter, 
+								intensityFluo, 
+								exposureFluo, 
+								zStackCenter,
+								nSlices, 
+								zStepSize,
+								True, # here we specifiy lightConstantOn to true, so fluo light source is not blinking 
+								None) # set the saveDirectory to None, in this case the images are saved to the default project directory as above
 
-print "Saved images in subdirectory of", projectDir
+print "Saved images in :", outDirectory
 
 myIM.closeConnection() # closing the connection will automatically switch back to live mode
 print "Done"

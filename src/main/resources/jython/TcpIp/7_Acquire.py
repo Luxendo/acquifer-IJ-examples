@@ -82,7 +82,7 @@ outputDir = myIM.acquireZstack(channelNumber,
 							   lightConstantOn, 
 							   saveDirectory)
 
-print "Saved images in :", saveDirectory
+print "Saved images in :", saveDirectory # which is also the same than outputDirectory in this case
 
 
 # OPTION2 : Using default project folder and plate ID

@@ -28,15 +28,19 @@ except Error, error :
 	IJ.error(error.getMessage())
 	raise Exception(error) # still throw an error to interrupt code execution
 
+print "Opening lid"
 myIM.openLid() 
 
+print "Waiting", delay, "seconds before closing lid and starting"
 Thread.sleep(delay * 1000) # pause execution in milliseconds
 # here could be commands for a robotic arm to put a new plate, pipet new reagents...
 
+print "Closing lid"
 myIM.closeLid()
 
 # Here we use a raw-string (prefixed with r), to prevent backslash to be interpreted as special character such as new line for \n
 # You dont need raw string if your path is using forward slash / or double back slash \\ as separator
+print "Starting experiment"
 myIM.runScript(script_path.getPath()) # This will pause further code execution until the script is finished running
 
 # Just close the port once the script is finished, also switching off any light source if any
@@ -45,7 +49,6 @@ myIM.closeConnection()
 # Notify that the script finished
 IJ.beep()    # play a sound notification
 print "Done" # seen in the script editor
-IJ.showStatus("Finished acquisition")
 
 # One could even send a mail notification once the experiment is over
 # but more complicated

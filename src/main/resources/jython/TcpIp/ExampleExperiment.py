@@ -111,7 +111,7 @@ myIM.setMode("script")
 for timepoint in range(1, nTimepoints+1): # range is exclusive ie it will be from 1 to 3
 	
 	# Wait before next timepoint
-	if timepoint != 1: # does not wait after the last iteration
+	if timepoint != 1: # does not wait for the ´first iteration
 		print "Waiting for", timeStep, "minutes"
 		TimeUnit.MINUTES.sleep(timeStep)
 		#TimeUnit.HOURS.sleep(timeStep) # use this one for hours

@@ -14,7 +14,7 @@ https://acquifer.github.io/acquifer-core/acquifer/core/TcpIp.html
 #@ File (label="Project directory", style="directory") project
 #@ String (label="plate ID") plate_id
 
-from acquifer.core        import TcpIp
+from acquifer.core        import TcpIp, WellPosition
 from java.util.concurrent import TimeUnit
 import collections
 
@@ -22,16 +22,16 @@ Well = collections.namedtuple('Well', ['ID', 'X', 'Y']) # Well here is like a co
 
 # Define our list of well with their coordinates
 # these X,Y coordinates corresponds to the center of the well in mm
-listWell = [Well("A001", 14.335, 10.809),
-			Well("A002", 23.370, 10.809),
-			Well("A003", 32.404, 10.809)]
+listWell = [WellPosition("A001", 14.335, 10.809),
+			WellPosition("A002", 23.370, 10.809),
+			WellPosition("A003", 32.404, 10.809)]
 
 # Timelapse infos
 nTimepoints = 3
 timeStep    = 1 # minutes
 
 
-def acquireStack(wellID, subposition, timepoint):
+def acquireStack(subposition, timepoint):
 	"""
 	This custom utility function performs the Z-stack acquisition for both channels.
 	It first runs a software autofocus using 2x2 binning then acquiring the images with full-resolution for the 2 channels
@@ -39,7 +39,7 @@ def acquireStack(wellID, subposition, timepoint):
 	"""
 	
 	# First update metadata
-	myIM.setMetadataWellId(wellID)
+	#myIM.setMetadataWellId(wellID) # not needed when using moveXYto(well), automatically updated
 	myIM.setMetadataSubposition(subposition)
 	myIM.setMetadataTimepoint(timepoint)
 	
@@ -120,15 +120,15 @@ for timepoint in range(1, nTimepoints+1): # range is exclusive ie it will be fro
 	
 	for well in listWell:
 		
-		print "Imaging well :", well.ID 
+		print "Imaging well :", well.getWellId()
+		myIM.moveXYto(well) # this command also updates the current wellId for filenames, no need to call setMetadataWellId
 		
 		# Acquire 1st subposition
-		myIM.moveXYto(well.X, well.Y)
-		acquireStack(well.ID, 1, timepoint)
+		acquireStack(1, timepoint) # acquireStack(subPosition, timepoint)
 		
 		# Acquire 2nd subposition which is 2.5 mm apart from the center in X and Y
 		myIM.moveXYby(2.5, 2.5)
-		acquireStack(well.ID, 2, timepoint)
+		acquireStack(2, timepoint)
 
 
 myIM.closeConnection()

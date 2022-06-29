@@ -17,32 +17,26 @@ https://acquifer.github.io/acquifer-core/acquifer/core/TcpIp.html
 #@ File (label="Project directory", style="directory") project
 #@ String (label="plate ID") plate_id
 from ij import IJ
-from acquifer.core        import TcpIp
+from acquifer.core        import TcpIp, WellPosition
 from java.util.concurrent import TimeUnit
-import collections
-
-Well = collections.namedtuple('Well', ['ID', 'X', 'Y']) # Well here is like a constructor
 
 # Define our list of well with their coordinates
 # these X,Y coordinates corresponds to the center of the well in mm
-listWells = [Well("A001", 14.335, 10.809),
-			Well("A002", 23.370, 10.809),
-			Well("A003", 32.404, 10.809)]
+listWells = [WellPosition("A001", 14.335, 10.809),
+			 WellPosition("A002", 23.370, 10.809),
+			 WellPosition("A003", 32.404, 10.809)]
 
 # Timelapse infos
 nTimepoints = 3
 timeStep    = 1 # minutes
 
 
-def acquireStack(wellID):
+def acquireStack():
 	"""
 	This custom utility function performs the Z-stack acquisition for both channels.
 	It first runs a software autofocus using 2x2 binning then acquiring the images with full-resolution for the 2 channels
 	IT is called for each well.
 	"""
-	
-	# First set the wellID metadata
-	myIM.setMetadataWellId(wellID)
 	
 	# Define objective used for AF and acquisition
 	# The objective index is between 1 and 4, with increasing magnifications
@@ -116,10 +110,10 @@ myIM.setMode("script")
 
 for well in listWells:
 	
-	print "Imaging well :", well.ID 
+	print "Imaging well :", well.getWellId() 
 	
-	myIM.moveXYto(well.X, well.Y)
-	outputDir = acquireStack(well.ID)
+	myIM.moveXYto(well) # this update the well ID for metadata too
+	outputDir = acquireStack()
 	
 	# ON-THE-FLY : Display the acquired images as a hyperstack in Fiji
 	# This uses the macro-recorded command in jython of the ACQUIFER Make Hyperstack plugin, replacing the image directory and current well ID

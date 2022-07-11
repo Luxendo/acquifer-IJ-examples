@@ -12,3 +12,4 @@ buildNumber.properties
 .project
 *.class
 *.prefs
+**/.vs

@@ -15,6 +15,8 @@ import org.scijava.ui.swing.script.TextEditor;
  */
 public class ExampleOpener implements PlugIn {
 	
+	private static TextEditor editor = new TextEditor(IJ1Helper.getLegacyContext());
+	
 	/**
 	 * @param subPath the filepath after Fiji.app/scripts/Acquifer/example.<br> For instance "macros\IM04\test-metadata-im04.ijm" 
 	 */
@@ -24,8 +26,6 @@ public class ExampleOpener implements PlugIn {
 		
 		// Open a new instance of script editor
 		// when opening multiple scripts over time would be nice to keep using the same instance
-		Context context = IJ1Helper.getLegacyContext();
-		TextEditor editor = new TextEditor(context);
 		editor.loadTemplate(url); // name is not super adapted, not really a template, just loading from URL 
 		editor.setVisible(true);  // displays it once script is loaded only
 	}

@@ -27,8 +27,8 @@ SetTemperatureRegulation(1);
 double sampleTemperature = GetSampleTemperature(TemperatureUnit.Celsius);
 
 while (sampleTemperature < lowerBoundTemp || upperBoundTemp < sampleTemperature) { 
-		Log($"Wait another minute for temperature to reach {TargetTemp}.");
-		System.Threading.Thread.Sleep(new TimeSpan(0,1,0))); // hours, minutes, secs
+		Log(string.Format("Wait another minute for temperature to reach {0}.", TargetTemp));
+		System.Threading.Thread.Sleep(new TimeSpan(0,1,0)); // hours, minutes, secs
 		sampleTemperature = GetSampleTemperature(TemperatureUnit.Celsius);
 }
 

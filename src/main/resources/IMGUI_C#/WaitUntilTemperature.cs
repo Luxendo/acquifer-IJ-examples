@@ -22,22 +22,23 @@ double upperBoundTemp = targetTemp + deviation;
 // Define the waiting time, edit as needed
 TimeSpan initWait       = new TimeSpan(0,15,0);  // hours, minutes, seconds - How much time to wait initially, default to 15 min
 TimeSpan pauseTempCheck = new TimeSpan(0, 1, 0); // how much time to wait before checking if the temperature is in range, again at each iteration, default to 1 min
-TimeSpan waitPostTemp   = new Timespan(0,3,0)    // how much time to wait once temperature is in range, to make sure it is stable, default 3 min (optional ie set to 0 if not needed)
+TimeSpan waitPostTemp   = new TimeSpan(0, 3, 0);   // how much time to wait once temperature is in range, to make sure it is stable, default 3 min (optional ie set to 0 if not needed)
 
 // Start temp regulation
 SetTargetTemperature(targetTemp, TemperatureUnit.Celsius);
 SetTemperatureRegulation(1);
 
 // Wait initial time
-Log($"Waiting initially for {initWait.Hours}h, {initWait.Minutes}min, {initWait.Seconds}s for temperature to stabilize.");
+ 
+Log(string.Format("Waiting initially for {0}h,{1}min,{2}s for temperature to stabilize.", initWait.Hours, initWait.Minutes, initWait.Seconds));
 System.Threading.Thread.Sleep(initWait);
 
 // Check if temperature is reached after initial waiting time, otherwise wait another stepWait
 double sampleTemperature = GetSampleTemperature(TemperatureUnit.Celsius);
 
-while ( sampleTemperature < lowerBoundTemp || upperBoundTemp < sampleTemperature) ) // if below lower bound or above higher bound
+while ( sampleTemperature < lowerBoundTemp || upperBoundTemp < sampleTemperature ) // if below lower bound or above higher bound
 {
-	Log($" Current Temp : {sampleTemperature} °C - Wait another  {pauseTempCheck.Hours}h, {pauseTempCheck.Minutes}min, {pauseTempCheck.Seconds}s  for temperature to be in range.");
+	Log(string.Format("Current Temp : {0} °C - Wait another {1}h, {2}min, {3}s for temperature to be in range.", sampleTemperature, pauseTempCheck.Hours, pauseTempCheck.Minutes, pauseTempCheck.Seconds));
 	System.Threading.Thread.Sleep(pauseTempCheck);
 
 	// New temperature read before next iteration
@@ -45,8 +46,8 @@ while ( sampleTemperature < lowerBoundTemp || upperBoundTemp < sampleTemperature
 }
 
 // Wait once temperature is in range, to make sure temperature is stable
-Log($"Current sample temperature in range - Wait another {waitPostTemp.Hours}h, {waitPostTemp.Minutes}min, {waitPostTemp.Seconds}s  for temperature to stabilize.");
+Log(string.Format("Current sample temperature in range - Wait another {0}h,{1}min,{2}s for temperature to stabilize.", waitPostTemp.Hours, waitPostTemp.Minutes, waitPostTemp.Seconds));
 System.Threading.Thread.Sleep(waitPostTemp);
 
-// ADD HERE custom imaging script commands to e4xecute once temperature stable	 
+// ADD HERE custom imaging script commands to execute once temperature stable	 
 

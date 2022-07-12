@@ -13,15 +13,18 @@ double coolerTemp    = 28.0; // cooler temperature after heatshock
 // Define the waiting time, edit as needed
 TimeSpan initWait              = new TimeSpan(0, 15, 0); // hours, minutes, seconds - How much time to wait initially to leave time for the temperature to raise, default to 15 min
 TimeSpan stepWait              = new TimeSpan(0, 1, 0);  // how long to wait before checking again if the temperature has reached the target temperature, repeated until tempearture is actually reached. default to 1 min
-TimeSpan incubationTimeHot     = new Timespan(0, 10, 0); // how long to incubate with "higher" temperature, before coming back to lower temperature (default 10 min)
-TimeSpan stabilisationTimeCool = new Timespan(0, 10, 0); // how long to wait for cooler temperature to stabilize 
+TimeSpan incubationTimeHot     = new TimeSpan(0, 10, 0); // how long to incubate with "higher" temperature, before coming back to lower temperature (default 10 min)
+TimeSpan stabilisationTimeCool = new TimeSpan(0, 10, 0); // how long to wait for cooler temperature to stabilize 
 
 // Start heating until HeatshockTemp
 SetTargetTemperature(HeatshockTemp, TemperatureUnit.Celsius);
 SetTemperatureRegulation(1);
 
 // Wait initial time to leave time for temperature to raise
-Log($"Waiting initially for {initWait.Hours}h, {initWait.Minutes}min, {initWait.Seconds}s for temperature to reach {HeatshockTemp}°C.");
+Log(string.Format("Waiting initially for {0}h,{1}min,{2}s for temperature to reach {3}°C.", initWait.Hours,
+																						    initWait.Minutes,
+																						    initWait.Seconds,
+																						    HeatshockTemp));
 System.Threading.Thread.Sleep(initWait);
 
 // Check if temperature is reached after initial waiting time, otherwise wait another stepWait
@@ -29,7 +32,11 @@ double sampleTemperature = GetSampleTemperature(TemperatureUnit.Celsius);
 
 while (sampleTemperature < HeatshockTemp) // if below HeatShockTemp, wait a bit more
 {
-	Log($" Current sample temperature : {sampleTemperature} °C - Wait another  {stepWait.Hours}h, {stepWait.Minutes}min, {stepWait.Seconds}s  for temperature to reach {HeatshockTemp}°C.");
+	Log(string.Format("Current sample temperature : {0}°C - Wait another {1}h,{2}min,{3}s for temperature to reach {4}°C.", sampleTemperature,
+																															stepWait.Hours,
+																															stepWait.Minutes,
+																															stepWait.Seconds,
+																															HeatshockTemp));
 	System.Threading.Thread.Sleep(stepWait);
 
 	// New temperature read before next iteration
@@ -37,16 +44,22 @@ while (sampleTemperature < HeatshockTemp) // if below HeatShockTemp, wait a bit 
 }
 
 // Once heat shock temperature is reached incubate for a given time
-Log($"Reached \"higher\" temperature - Now incubate for another {incubationTimeHot.Hours}h, {incubationTimeHot.Minutes}min, {incubationTimeHot.Seconds}s  for temperature to stabilize.");
+Log(string.Format("Reached \"higher\" temperature - Now incubate/wait for temperature to stabilize for another {0}h,{1}min,{2}s.", incubationTimeHot.Hours,
+																																   incubationTimeHot.Minutes,
+																																   incubationTimeHot.Seconds));
 System.Threading.Thread.Sleep(incubationTimeHot);
 
 
 // Get back to cooler temperature
-SetTargetTemperature(coolerTemp, TemperatureUnit.Celsius);  //set heatshock temperature
+SetTargetTemperature(coolerTemp, TemperatureUnit.Celsius);
 
 double sampleTemperature2 = GetSampleTemperature(TemperatureUnit.Celsius);
 while (sampleTemperature2 > coolerTemp) {
-	Log($" Current sample temperature : {sampleTemperature2} °C - Wait another  {stepWait.Hours}h, {stepWait.Minutes}min, {stepWait.Seconds}s to go down to {coolerTemp}°C.");
+	Log(string.Format("Current sample temperature : {0}°C - Wait another {1}h,{2}min,{3}s for temperature to go down to {4}°C.", sampleTemperature2,
+																																 stepWait.Hours,
+																																 stepWait.Minutes,
+																																 stepWait.Seconds,
+																																 coolerTemp));
 	System.Threading.Thread.Sleep(stepWait);
 
 	// New temperature read before next iteration
@@ -54,7 +67,9 @@ while (sampleTemperature2 > coolerTemp) {
 }
 
 // Wait once temprature is in range, to make sure temperature is stable
-Log($"Reached cooler temperature, wait another {stabilisationTimeCool.Hours} h, {stabilisationTimeCool.Minutes} min, {stabilisationTimeCool.Seconds} s  for temperature to stabilize.");
+Log(string.Format("Reached cooler temperature, wait another {0}h,{1}min,{2}s for temperature to stabilize.", stabilisationTimeCool.Hours,
+																											 stabilisationTimeCool.Minutes,
+																											 stabilisationTimeCool.Seconds));
 System.Threading.Thread.Sleep(stabilisationTimeCool);
 
 // Here put the imaging commands 

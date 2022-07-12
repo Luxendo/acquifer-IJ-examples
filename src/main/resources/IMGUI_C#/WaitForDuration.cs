@@ -10,7 +10,7 @@ int hours = 0;
 int minutes = 15;
 int secs = 0;
 
-Log($"Waiting for {hours}h, {minutes}min, {secs}secs.")
+Log(string.Format("Waiting for {0}h,{1}min,{2}secs.", hours, minutes, secs));
 System.Threading.Thread.Sleep(new TimeSpan(hours, minutes, secs));
 
 // Here put the commands to execute after waiting

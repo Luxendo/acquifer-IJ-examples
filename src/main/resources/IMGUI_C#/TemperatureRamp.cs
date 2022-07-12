@@ -21,13 +21,15 @@ for (double TargetTemp = StartTemp; TargetTemp <= EndTemp; TargetTemp += StepTem
 	double sampleTemperature = GetSampleTemperature(TemperatureUnit.Celsius);
 
 	while (sampleTemperature < TargetTemp - deviationTemp || sampleTemperature > TargetTemp + deviationTemp ){
-		Log($"Current sample temperature : {sampleTemperature} - Wait another minute for temperature to be in range.");
-		System.Threading.Thread.Sleep(new TimeSpan(0, 1, 0))); // hours, minutes, secs
+		Log(string.Format("Current sample temperature : {0} - Wait another minute for temperature to be in range.", sampleTemperature));
+		System.Threading.Thread.Sleep(new TimeSpan(0, 1, 0)); // hours, minutes, secs
 		sampleTemperature = GetSampleTemperature(TemperatureUnit.Celsius);
 	}
 		  
 	// Wait once temperature is in range, to make sure temperature is stable
-	Log($"Current sample temperature in range - Wait another {WaitStabilisationOrIncubation.Hours}h, {WaitStabilisationOrIncubation.Minutes}min, {WaitStabilisationOrIncubation.Seconds}s  for temperature to stabilize or for incubation.");
+	Log(string.Format("Current sample temperature in range - Wait another {0}h,{1}min,{2}s for temperature to stabilize or for incubation.", WaitStabilisationOrIncubation.Hours,
+																																			 WaitStabilisationOrIncubation.Minutes,
+																																			 WaitStabilisationOrIncubation.Seconds));
 	System.Threading.Thread.Sleep(WaitStabilisationOrIncubation);
 
 }

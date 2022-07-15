@@ -34,7 +34,7 @@ public class ExampleOpener implements PlugIn {
 		
 		if (subPath.endsWith("cs")) {
 			ScriptService scriptService = context.getService(ScriptService.class);
-			//editor.setLanguage() protected method !
+			editor.setLanguage(scriptService.getLanguageByExtension("java"));
 		}
 		
 		editor.setVisible(true);  // displays it once script is loaded only

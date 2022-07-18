@@ -5,7 +5,8 @@ import net.imagej.legacy.IJ1Helper;
 
 import java.net.URL;
 
-import org.scijava.Context;
+//import org.apache.commons.io.FilenameUtils;
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.scijava.ui.swing.script.TextEditor;
 
 /** Open an example script in the script editor. <br>
@@ -15,6 +16,7 @@ import org.scijava.ui.swing.script.TextEditor;
  */
 public class ExampleOpener implements PlugIn {
 	
+	/** Single instance of the text editor, to avoid opening a new one each time. */
 	private static TextEditor editor = new TextEditor(IJ1Helper.getLegacyContext());
 	
 	/**
@@ -24,10 +26,17 @@ public class ExampleOpener implements PlugIn {
 	public void run(String subPath) {
 		URL url = getClass().getClassLoader().getResource(subPath);
 		
-		// Open a new instance of script editor
-		// when opening multiple scripts over time would be nice to keep using the same instance
 		editor.loadTemplate(url); // name is not super adapted, not really a template, just loading from URL 
-		editor.setVisible(true);  // displays it once script is loaded only
+		
+		// Workaround to set syntax highlighting for C#, and more generally non scripting languages
+		// https://forum.image.sc/t/texteditor-setlanguage-for-other-file-formats/69569/2?u=lthomas
+		if (subPath.endsWith(".cs")) {
+			editor.getTextArea().setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CSHARP);
+			//editor.setEditorPaneFileName(FilenameUtils.getBaseName(subPath)); // does not help, still the extension of the last used scripting language
+			// actually last commented line even cause trouble upon opening a second tab
+		}
+		
+		editor.setVisible(true);  // displays it once script is loaded only, or if already shown bring to front
 	}
 
 }

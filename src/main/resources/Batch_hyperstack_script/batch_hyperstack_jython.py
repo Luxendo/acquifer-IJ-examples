@@ -18,6 +18,7 @@ You can also find all the examples on the following GitHub repository: https://g
 #@ImagePlus proj
 from ij import IJ
 from ij.plugin import Commands
+from time import sleep
 
 IJ.log("Processing stack : " + stack.getTitle())
 IJ.log("Processing projection : " + proj.getTitle())
@@ -25,6 +26,10 @@ IJ.log("Processing projection : " + proj.getTitle())
 # Your custom processing commands, here we just display the images
 stack.show()
 proj.show()
+
+# Wait 3 secs, just to see the images before next iteration
+IJ.log("Waiting 3 secs before closing and processing next well.")
+sleep(3)
 
 ## Close images (and free memory)
 

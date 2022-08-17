@@ -14,7 +14,7 @@ selectedTimepoints = newArray(0);     // same for timepoints, by passing an empt
 
 
 // This function will display at once all hyperstacks matching the selected dimensions
-Ext.IM_showMultiHyperstacksFromDirectory(directory, selectedWell, 
+Ext.IM_showMultiHyperStacksFromDirectory(directory, selectedWell, 
                                          	     selectedSubposition, 
                                                  selectedChannels, 
                                                  selectedZ, 
@@ -24,6 +24,6 @@ Ext.IM_showMultiHyperstacksFromDirectory(directory, selectedWell,
 // this is convenient for looping, then you have the opportunity to process the generated hyperstacks before opening the next one
 // Make sure to use upper case for the well ids ex: "A001"
 // Here showing the first subposition within C002
-Ext.IM_showSingleHyperstackFromDirectory(directory, "C002", 1, selectedChannels,
+Ext.IM_showSingleHyperStackFromDirectory(directory, "C002", 1, selectedChannels,
 															selectedZ,
 															selectedTimepoints);

@@ -19,12 +19,12 @@ downScaling = 10
 
 # Method 1 - Create a VirtualPlate then call toHyperstack
 virtualPlate = VirtualPlate(plateSeries, layout, downScaling)
-hyperstack = virtualPlate.toHyperstack() 
+hyperstack = virtualPlate.toHyperStack() 
 hyperstack.show()
 Hyperstack_Maker.resetDisplayRange(hyperstack) # reset brightness-contrast so the image do not appear black
 
 # Method 2 : directly create a hyperstack
-hyperstack2 = VirtualPlate.createHyperstackFromPlateSeries(plateSeries,
+hyperstack2 = VirtualPlate.createHyperStackFromPlateSeries(plateSeries,
 													  	  layout,
 													  	  downScaling)
 hyperstack2.show()

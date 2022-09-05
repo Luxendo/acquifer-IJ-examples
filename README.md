@@ -34,6 +34,15 @@ While the jar package contains a single IJ1-type plugin, the package should be c
 The example scripts are stored in the resource directory and listed accordingly in the plugins.config file (also part of the resource).  
 The compilation will automatically put these script files in the jar, so they can be loaded by the "Example launcher".  
 
+NOTE : Make sure in plugins.config that the plugin names dont have a white space after the " and before the comma.  
+Example
+
+Here is fine
+Acquifer>Examples>IMGUI internal C#, "Wait for (duration)",        acquifer.examples.ExampleOpener("IMGUI_C#/WaitForDuration.cs")
+
+Here is not fine, space after (duration)", the plugin does not show up
+Acquifer>Examples>IMGUI internal C#, "Wait for (duration)" ,        acquifer.examples.ExampleOpener("IMGUI_C#/WaitForDuration.cs")
+
 In the maven configuration define the following properties to have the jar automatically copied to the Fiji.app/jars directory (thanks to the parent scijava pom).  
 
 __Maven build parameters__  

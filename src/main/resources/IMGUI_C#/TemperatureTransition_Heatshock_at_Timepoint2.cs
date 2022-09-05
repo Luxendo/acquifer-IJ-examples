@@ -28,7 +28,7 @@ double sampleTemperature = GetSampleTemperature(TemperatureUnit.Celsius);
 
 while (sampleTemperature < lowerBoundTemp || upperBoundTemp < sampleTemperature) { 
 		Log(string.Format("Wait another minute for temperature to reach {0}.", TargetTemp));
-		System.Threading.Thread.Sleep(new TimeSpan(0,1,0)); // hours, minutes, secs
+		Wait(60000); // 1 min
 		sampleTemperature = GetSampleTemperature(TemperatureUnit.Celsius);
 }
 

@@ -11,6 +11,6 @@ int minutes = 15;
 int secs = 0;
 
 Log(string.Format("Waiting for {0}h,{1}min,{2}secs.", hours, minutes, secs));
-System.Threading.Thread.Sleep(new TimeSpan(hours, minutes, secs));
+Wait(new TimeSpan(hours, minutes, secs).TotalMilliseconds);
 
 // Here put the commands to execute after waiting

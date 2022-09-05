@@ -25,7 +25,7 @@ Log(string.Format("Waiting initially for {0}h,{1}min,{2}s for temperature to rea
 																						    initWait.Minutes,
 																						    initWait.Seconds,
 																						    HeatshockTemp));
-System.Threading.Thread.Sleep(initWait);
+Wait(initWait.TotalMilliseconds);
 
 // Check if temperature is reached after initial waiting time, otherwise wait another stepWait
 double sampleTemperature = GetSampleTemperature(TemperatureUnit.Celsius);
@@ -37,7 +37,7 @@ while (sampleTemperature < HeatshockTemp) // if below HeatShockTemp, wait a bit 
 																															stepWait.Minutes,
 																															stepWait.Seconds,
 																															HeatshockTemp));
-	System.Threading.Thread.Sleep(stepWait);
+	Wait(stepWait.TotalMilliseconds);
 
 	// New temperature read before next iteration
 	sampleTemperature = GetSampleTemperature(TemperatureUnit.Celsius);
@@ -47,8 +47,10 @@ while (sampleTemperature < HeatshockTemp) // if below HeatShockTemp, wait a bit 
 Log(string.Format("Reached \"higher\" temperature - Now incubate/wait for temperature to stabilize for another {0}h,{1}min,{2}s.", incubationTimeHot.Hours,
 																																   incubationTimeHot.Minutes,
 																																   incubationTimeHot.Seconds));
-System.Threading.Thread.Sleep(incubationTimeHot);
+Wait(incubationTimeHot.TotalMilliseconds);
 
+// Acquire something already (optional)
+// HERE PASTE SCRIPT (coordinates could be defined at the top)
 
 // Get back to cooler temperature
 SetTargetTemperature(coolerTemp, TemperatureUnit.Celsius);
@@ -60,7 +62,7 @@ while (sampleTemperature2 > coolerTemp) {
 																																 stepWait.Minutes,
 																																 stepWait.Seconds,
 																																 coolerTemp));
-	System.Threading.Thread.Sleep(stepWait);
+	Wait(stepWait.TotalMilliseconds);
 
 	// New temperature read before next iteration
 	sampleTemperature2 = GetSampleTemperature(TemperatureUnit.Celsius);
@@ -70,7 +72,7 @@ while (sampleTemperature2 > coolerTemp) {
 Log(string.Format("Reached cooler temperature, wait another {0}h,{1}min,{2}s for temperature to stabilize.", stabilisationTimeCool.Hours,
 																											 stabilisationTimeCool.Minutes,
 																											 stabilisationTimeCool.Seconds));
-System.Threading.Thread.Sleep(stabilisationTimeCool);
+Wait(stabilisationTimeCool.TotalMilliseconds);
 
 // Here put the imaging commands 
 

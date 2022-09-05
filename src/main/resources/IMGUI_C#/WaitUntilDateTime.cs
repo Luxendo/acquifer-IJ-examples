@@ -9,6 +9,6 @@ DateTime startTime = new DateTime(2022, 6, 23, 23, 31, 00);  // YEAR, MONTH, DAY
 TimeSpan diff = startTime - DateTime.Now;
 
 Log(string.Format("Waiting for {0}h,{1}min,{2}s", diff.Hours, diff.Minutes, diff.Seconds));
-System.Threading.Thread.Sleep(diff);
+Wait(diff.TotalMilliseconds);
 
 // Here put the commands to execute after waiting

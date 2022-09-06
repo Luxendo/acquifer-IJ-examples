@@ -10,9 +10,11 @@
  */
 
 //insert e.g. before StartInterval() in the first for-loop in regular scripts
+int heatshockTimepoint = 2;
+TimeSpan incubationTimeHot = new TimeSpan(0,10,0); // h,m,s
 double TargetTemp = 28.0; //set regular temperature
 
-if (LoopNumber == 2) {
+if (LoopNumber == heatshockTimepoint) {
 	TargetTemp = 35.0; //set hotter temperature
 }
 
@@ -29,7 +31,20 @@ double sampleTemperature = GetSampleTemperature(TemperatureUnit.Celsius);
 while (sampleTemperature < lowerBoundTemp || upperBoundTemp < sampleTemperature) { 
 		Log(string.Format("Wait another minute for temperature to reach {0}.", TargetTemp));
 		Wait(60000); // 1 min
-		sampleTemperature = GetSampleTemperature(TemperatureUnit.Celsius);
+		sampleTemperature = GetSampleTemperature(TemperatureUnit.Celsius); // Check temperature AFTER waiting
 }
 
+// Start the countdown for the timelapse interval
+// The incubation time for the heatshock would be deducted from it
+// If the incubation time with hot temperature is longer than the timelapse interval, the IM will just go on with the next timepoint asap
+StartInterval(); 
+
+// Additional "timelapse" delay if doing the heatshock
+if (LoopNumber == heatShockTimepoint){
+	// Once heat shock temperature is reached incubate for a given time
+	Log(string.Format("Reached \"higher\" temperature - Now incubate/wait for temperature to stabilize for another {0}h,{1}min,{2}s.", incubationTimeHot.Hours,
+																																	   incubationTimeHot.Minutes,
+																																	   incubationTimeHot.Seconds));
+	Wait(incubationTimeHot.TotalMilliseconds);
+}
 // HERE the rest of the for-loop with imaging steps

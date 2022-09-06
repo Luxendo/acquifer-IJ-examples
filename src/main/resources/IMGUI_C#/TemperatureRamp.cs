@@ -27,7 +27,7 @@ for (double TargetTemp = StartTemp; TargetTemp <= EndTemp; TargetTemp += StepTem
 	while (sampleTemperature < TargetTemp - deviationTemp || sampleTemperature > TargetTemp + deviationTemp ){
 		Log(string.Format("Current sample temperature : {0} - Wait another minute for temperature to be in range.", sampleTemperature));
 		Wait(60000); // 1 min
-		sampleTemperature = GetSampleTemperature(TemperatureUnit.Celsius);
+		sampleTemperature = GetSampleTemperature(TemperatureUnit.Celsius); // Check temperature again AFTER waiting
 	}
 		  
 	// Wait once temperature is in range, to make sure temperature is stable

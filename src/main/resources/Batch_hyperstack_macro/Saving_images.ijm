@@ -2,7 +2,7 @@
  * This macro demonstrates different options to save an image at different locations when using the batch macro plugins:  
  * - option1: Saving in the image directory
  * - option2: Saving in the default subdirectory within the image directory
- * - option3: Saving in a custom direcotry (here chosen as a custom subdirectory within the image directory)
+ * - option3: Saving in a custom directory (here chosen as a custom subdirectory within the image directory)
  * Here the active image is saved as tiff, although the code could be adapted to save an image after some pre-processing, and with a different extension (simply change the extension in the code below).
  */
  

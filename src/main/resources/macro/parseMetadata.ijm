@@ -20,13 +20,21 @@ image_name = "-A002--PO01--LO001--CO6--SL001--PX32500--PW0080--IN0020--TM281--X0
 print("Image name :", image_name);
 
 ID = Ext.IM_getWellId(image_name);
-print("Well Id :", ID);
+print("Well ID :", ID);
 
-Ext.IM_getWellColumn(image_name, column);
-print("Plate column : ", column);
+// When macro-recording acquifer plugins, the well ID are lower case, and ImageJ is case-sensitive
+// so using the lower case variant for WellID and WellRow can be a good idea !
+id = Ext.IM_getWellIdLowerCase(image_name);
+print("Well ID (lower case) :", id);
 
 row = Ext.IM_getWellRow(image_name);
 print("Plate row : ", row);
+
+rowLowerCase = Ext.IM_getWellRowLowerCase(image_name);
+print ("Plate row (lower case) :", rowLowerCase);
+
+Ext.IM_getWellColumn(image_name, column);
+print("Plate column : ", column);
 
 Ext.IM_getWellSubPosition(image_name, subposition);
 print("Well subposition : ", subposition);

@@ -13,7 +13,7 @@
  * You can also find all the examples on the following GitHub repository: https://github.com/acquifer/acquifer-IJ-examples/tree/main/src/main/resources
  */
  
-originalTitle = getTitle(); // get the original image title
+originalTitle = getTitle(); // get the original image title (just for saving)
 
 // Smooth and edge detection
 // Applied on every slice of the stack here
@@ -29,10 +29,10 @@ saveAs("Tiff", outPath);
 print("Saved (double-click line to open in Fiji):");
 print(outPath + ".tif" ); // print the filepath on a dedicated line to make it clickable
 
-// if in batch mode, show images
+// If selected "Dont show stack" then actually show the processed image
 setBatchMode("show");
 
-// Close image/free memory in batch mode
+// Close image/free memory
 print("Waiting 3 secs before closing images.");
 wait(3000); // ms
 

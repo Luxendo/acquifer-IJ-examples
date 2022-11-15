@@ -6,4 +6,4 @@ Use File > Save As... to save a copy of this example, and keep your modification
 You can also find all the examples on the following GitHub repository: https://github.com/acquifer/acquifer-IJ-examples/tree/main/src/main/resources
 """
 from acquifer.ij.im04.plugins import Hyperstack_Maker
-Hyperstack_Maker.setChannelColor(4, "red") # set channel 4 to red-LUT
+Hyperstack_Maker.setChannelLut(4, "Red") # set channel 4 to red-LUT

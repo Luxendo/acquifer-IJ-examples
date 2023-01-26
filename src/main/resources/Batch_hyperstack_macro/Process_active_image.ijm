@@ -13,7 +13,7 @@
  * You can also find all the examples on the following GitHub repository: https://github.com/acquifer/acquifer-IJ-examples/tree/main/src/main/resources
  */
  
-originalTitle = getTitle(); // get the original image title (just for saving)
+originalTitle = getTitle(); // get the original image title (just for saving)
 
 // Smooth and edge detection
 // Applied on every slice of the stack here

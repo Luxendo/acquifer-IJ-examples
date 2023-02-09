@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.acquifer</groupId>
   <artifactId>acquifer-IJ-examples</artifactId>
-  <version>0.0.4</version>
+  <version>0.0.5</version>
   
   	<parent>
 		<groupId>org.scijava</groupId>
@@ -69,10 +69,26 @@
 		<dependency>	
 			<groupId>de.acquifer</groupId>
 			<artifactId>acquifer-IJ</artifactId>
-			<version>4.0.0</version>
+			<version>6.0.0</version>
 		</dependency>
 		
   </dependencies>
+  
+  	<organization>
+		<name>Acquifer</name>
+		<url>www.acquifer.de</url>
+	</organization>
+	
+	<developers>
+		<developer>
+			<name>Laurent Thomas</name>
+			<url>https://github.com/LauLauThom/</url>
+		</developer>
+	</developers>
+	
+	<properties>
+    	<enforcer.skip>true</enforcer.skip>
+  	</properties>
 		
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>

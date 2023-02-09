@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.0.5] - 2023-02-09
+
+### Added
+- Added skipping of enforcer rules from parent-pom scijava to the pom of the project, avoiding the need to have licence file...
+- Added organisation and developer section to the pom
+
+### Fixed
+- TcpIp jython example, catch `Exception` instead of `Error`, the latest not being a python keyword 
+
 ## [0.0.4] - 2022-11-15
 
 ### Changed

@@ -72,7 +72,7 @@ class ClickListener(MouseListener):
 		try : 
 			self.im = TcpIp() # open the communication port with the IM
 
-		except Error, error :
+		except Exception, error :
 			IJ.error(error.getMessage())
 			raise Exception(error) # still throw an error to interrupt code execution
 

@@ -81,9 +81,10 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 		super.run(arg);
 	}
 	
+	/** Shown when the mouse is hovered over the toolbar icon. */
 	@Override
 	public String getToolName() {
-		return "Move objective to clicked coordinates";
+		return "Move objective to clicked coordinates and AF/Acquire. Double-click to configure.";
 	}
 	
 	@Override

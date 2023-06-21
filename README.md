@@ -9,7 +9,7 @@ Or directly go to one of the example subsections :
 - [acquifer.core data-types](https://github.com/acquifer/acquifer-IJ-examples/tree/main/src/main/resources/jython/Data-structure) (Dataset, ImagePlane...)
 - [External microscope control via TcpIp](https://github.com/acquifer/acquifer-IJ-examples/tree/main/src/main/resources/jython/TcpIp)
 
-
+This repository also provides the click tools via the TcpIp toolbar : in the ACQUIFER menu, select `Smart Imaging > TcpIp control toolbar`
 
 ## Download this repository
 You can __download this repository__ by clicking the green button "code" and select "Download zip".  
@@ -37,15 +37,20 @@ The compilation will automatically put these script files in the jar, so they ca
 NOTE : Make sure in plugins.config that the plugin names dont have a white space after the " and before the comma.  
 Example
 
-Here is fine
-Acquifer>Examples>IMGUI internal C#, "Wait for (duration)",        acquifer.examples.ExampleOpener("IMGUI_C#/WaitForDuration.cs")
+Here is fine  
+`Acquifer>Examples>IMGUI internal C#, "Wait for (duration)",        acquifer.examples.ExampleOpener("IMGUI_C#/WaitForDuration.cs")`
 
-Here is not fine, space after (duration)", the plugin does not show up
-Acquifer>Examples>IMGUI internal C#, "Wait for (duration)" ,        acquifer.examples.ExampleOpener("IMGUI_C#/WaitForDuration.cs")
+Here is not fine, space after (duration)", the plugin does not show up  
+`Acquifer>Examples>IMGUI internal C#, "Wait for (duration)" ,        acquifer.examples.ExampleOpener("IMGUI_C#/WaitForDuration.cs")`
 
 In the maven configuration define the following properties to have the jar automatically copied to the Fiji.app/jars directory (thanks to the parent scijava pom).  
 
-__Maven build parameters__  
+__Maven build parameters__
+   
+Set skip_test to true, to avoid issues with not fully implemented tests.
+
+```
 scijava.app : Path to Fiji.app  
 enforcer.skip = true - this prevent issue since the package does not fullfill all requirements of the parent pom (licences..)  
 scijava.deleteOtherVersions = older  
+```

@@ -10,7 +10,7 @@ The camera settings are typically set once and will apply for following commands
 
 2 parameters can be changed for the camera : 
 
-- the area of the sensor used for imaging
+- the size of the field of view (sensor area)
 this can be used to image specific regions of interest, thus reducing the image size and the overall dataset size
 The default area is the full sensor area which corresponds to 2048 x 2048 pixels.
 The area is specified as a tuple of 4 values (x,y,width,height) with x,y the coordinates of the top left pixel of the effective area (default to x=0, y=0).
@@ -54,13 +54,11 @@ Thread.sleep(5000) # wait 5 secs, to leave the opportunity to see it
 
 
 ## OPTION 2 : Set the camera sensor area only, 
-# this command also resets the binning factor to its default value of 1
 myIM.setCamera(x, y, width, height)
 Thread.sleep(5000) # wait 5 secs, to leave the opportunity to see it
 
 
 # OPTION 3 : Set the binning factor only
-# this command also resets the default full sensor area 2048 x 2048 
 # binning value can be one of 1 (no binning), 2 (2x2), 4 (4x4)
 myIM.setCameraBinning(binning)
 Thread.sleep(5000) # wait 5 secs, to leave the opportunity to see it

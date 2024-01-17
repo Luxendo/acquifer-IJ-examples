@@ -28,6 +28,7 @@ using the setMode("script") command.
 See the API documentation for the list of commands available by TcpIp and their docstrings. 
 https://acquifer.github.io/acquifer-core/acquifer/core/TcpIp.html
 """
+#@ String (visibility=MESSAGE, value="", required=false) Empty_on_purpose_to_show_label
 #@File (style="directory") directory
 
 from acquifer.core import TcpIp

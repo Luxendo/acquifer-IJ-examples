@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.0.6] - 2024-02-12
+
+### Fixed
+- Link to javadoc now hosted under luxendo.github.io
+
+
 ## [0.0.5] - 2023-02-09
 
 ### Added
@@ -12,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 - TcpIp jython example, catch `Exception` instead of `Error`, the latest not being a python keyword 
 
+
 ## [0.0.4] - 2022-11-15
 
 ### Changed
@@ -20,15 +27,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 - Corrected small issues with jythons scripts
 
+
 ## [0.0.3] - Unreleased
 
 ### Changed
 - Example scripts open in the same script editor instance (singleton)
 
+
 ## [0.0.2] - 2022-06-29
 
 ### Added
 - C# sharp examples
+
 
 ## [0.0.1] - 2022-01-10
 

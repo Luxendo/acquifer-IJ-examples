@@ -41,7 +41,8 @@ myIM.closeLid()
 # Here we use a raw-string (prefixed with r), to prevent backslash to be interpreted as special character such as new line for \n
 # You dont need raw string if your path is using forward slash / or double back slash \\ as separator
 print "Starting experiment"
-myIM.runScript(script_path.getPath()) # This will pause further code execution until the script is finished running
+dataset_directory = myIM.runScript(script_path.getPath()) # This will pause further code execution until the script is finished running
+print "Finished acquisition, images saved in ", dataset_directory
 
 # Just close the port once the script is finished, also switching off any light source if any
 myIM.closeConnection()

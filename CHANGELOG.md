@@ -3,6 +3,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.0.7] - Unreleased
+
+### Added
+- Open/Close menu entry in smart imaging toolbar (right-click on IM icon)
+
+### Changed
+- Smart Imaging toolbar, IM icon now is meant to be right-clicked, and the play icon is the one providing the click-tool rescreening
+
+### Fixed
+- Smart Imaging click tool can handle hyperstack as genereated by the Make hyperstack plugin
+
+
+
 ## [0.0.6] - 2024-02-12
 
 ### Fixed

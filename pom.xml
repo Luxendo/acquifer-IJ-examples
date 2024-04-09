@@ -45,6 +45,7 @@
   		<dependency>
 			<groupId>net.imagej</groupId>
 			<artifactId>ij</artifactId>
+			<version>1.53u</version>
 		</dependency>
 		
 		<!-- For the context to get the script service in ImageJ1 plugin - https://mvnrepository.com/artifact/net.imagej/imagej-legacy -->

@@ -1,12 +1,16 @@
 package acquifer.toolbarIM;
 
+import java.awt.EventQueue;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JOptionPane;
+
 import acquifer.core.TcpIp;
+import acquifer.examples.ControlIM_XYZ;
 import ij.IJ;
 import ij.IJEventListener;
 import ij.gui.Toolbar;
@@ -68,6 +72,15 @@ public class DropdownIM extends PlugInTool implements IJEventListener, ActionLis
 		openCloseMenu.addActionListener(this);
 		dropdown.add(openCloseMenu);
 		
+		/*
+		// Move IM XYZ
+		// Open/Close lid
+		MenuItem moveIM_Menu = new MenuItem("Move objective (XYZ)");
+		moveIM_Menu.setActionCommand("move");
+		moveIM_Menu.addActionListener(this);
+		dropdown.add(moveIM_Menu);
+		*/
+		
 		// Add dropdown to toolbar before showing it
 		tb.add(dropdown);
 		dropdown.show(e.getComponent(), e.getX(), e.getY());
@@ -100,6 +113,20 @@ public class DropdownIM extends PlugInTool implements IJEventListener, ActionLis
 				else
 					im.closeLid();
 				
+				break;
+			
+			case "move": // never happening, commented above
+				/*trying to call the plugin just freezes, some threading issue
+				EventQueue.invokeLater(new Runnable() {
+				    public void run() {
+						ControlIM_XYZ plugin = new ControlIM_XYZ();
+						plugin.run("");
+						IJ.log("finished calling plugin");
+				    }
+				});
+				*/
+				JOptionPane.showMessageDialog(null, "Hello World"); // works
+
 				break;
 		}
 	}

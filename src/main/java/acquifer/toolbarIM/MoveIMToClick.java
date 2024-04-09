@@ -18,6 +18,7 @@ import fiji.util.gui.GenericDialogPlus;
 import ij.IJ;
 import ij.ImageJ;
 import ij.ImagePlus;
+import ij.ImageStack;
 import ij.gui.ImageCanvas;
 import ij.plugin.tool.PlugInTool;
 
@@ -162,7 +163,18 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 		*/
 		
 		// Get metadata used for the coordinates calculations
-		String imageName = imp.getTitle();
+		String imageName;
+		if (imp.isHyperStack()) { // make it compatible with the OpenInFiji tool
+			
+			int sliceIndex = imp.getCurrentSlice(); // 1-based, reflect also hyperstack sliders
+			
+			ImageStack stack = imp.getImageStack();
+			imageName = stack.getSliceLabel(sliceIndex);
+		}
+		
+		else {
+			imageName = imp.getTitle();
+		}
 
 		// Get clicked coordinates
 		Point point = canvas.getCursorLoc(); // directly in pixels within the image, independent of the zoom

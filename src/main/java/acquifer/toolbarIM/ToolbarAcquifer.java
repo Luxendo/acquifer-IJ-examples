@@ -27,8 +27,8 @@ public class ToolbarAcquifer implements PlugIn {
 			return; // The toolbar is not populated in this case
 		}
 		
+		Toolbar.addPlugInTool(new DropdownIM(im));
 		Toolbar.addPlugInTool(new MoveIMToClick(im));
-		Toolbar.addPlugInTool(new SwitchToLive(im));
 		
 	}
 

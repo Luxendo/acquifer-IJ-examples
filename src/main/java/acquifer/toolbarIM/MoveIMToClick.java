@@ -89,7 +89,9 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 	
 	@Override
 	public String getToolIcon() {
-		return "T1d15IT4d15M"; // IM font size 15, x = 1, y = 13 i.e d in hex, see https://imagej.nih.gov/ij/developer/macro/macros.html#icons
+		// generated with the image to hex macro from Mutterer J. https://imagej.net/ij/macros/tools/Image_To_Tool_Icon.txt
+		return "C000C111C222C333C444C555C666D44D45D46D47D48D55D56D57D65D66D67D76C666D58C666D54C666D49D86C666D75C666D77C666D43C666C777D68C777D64C777C888D33C888D34C888D59C999D35C999D36C999D85C999D37C999D96C999D38C999D39C999D87C999D53CaaaD32CaaaD4aCaaaD3aCaaaCbbbD78CbbbD74CbbbCcccD42CcccCdddD69CdddD95CdddCeeeD63CeeeD97CeeeD5aCeeeD3bCeeeCfffDa6CfffD84CfffD22D23CfffD24D25D31D88CfffD52CfffD26CfffD27CfffD28D4bCfffD29CfffD2aCfffDa5CfffD73D79CfffD21D2bD41CfffD6aD94Da7CfffD00D01D02D03D04D05D06D07D08D09D0aD0bD0cD10D11D12D13D14D15D16D17D18D19D1aD1bD1cD20D2cD30D3cD40D4cD50D51D5bD5cD60D61D62D6bD6cD70D71D72D7aD7bD7cD80D81D82D83D89D8aD8bD8cD90D91D92D93D98D99D9aD9bD9cDa0Da1Da2Da3Da4Da8Da9DaaDabDacDb0Db1Db2Db3Db4Db5Db6Db7Db8Db9DbaDbbDbcDc0Dc1Dc2Dc3Dc4Dc5Dc6Dc7Dc8Dc9DcaDcbDcc";
+		//return "icon:icon.png";
 	}
 	
 	@Override
@@ -188,7 +190,7 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 		// Move to XY
 		IJ.log("\nMoving objective to clicked XY position, and Z-position of original image");
 		//im.moveXYto(xy_mm[0], xy_mm[1]);		
-		im.moveXYZto(xy_mm[0], xy_mm[1], z_um); // also move Z
+		im.moveXYZto(xy_mm[0], xy_mm[1], z_um); // also move Z, TODO check if needed
 		
 		String lightSource = LIST_CHANNELS_CODE[selectedChannel];
 		

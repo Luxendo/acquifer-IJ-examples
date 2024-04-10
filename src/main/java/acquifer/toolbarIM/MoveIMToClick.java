@@ -37,7 +37,7 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 	
 	/** 1-based index of the objective in the IM-system */
 	private int objectiveIndex = 1;
-	private int selectedChannel = 0; // 0-based -> retrieve label and code via the LIST_CHANNELS  
+	private int selectedLightsourceIndex = 0; // 0-based -> retrieve label and code via the LIST_CHANNELS  
 	private int detectionFilterIndex = 0; 
 	
 	private boolean doAF;
@@ -62,9 +62,16 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 	private boolean backToLive = true;
 
 	private final String[] LIST_OBJECTIVES = new String[] {"2x", "4x", "10x", "20x"};
-	private final String[] LIST_CHANNELS_ID = new String[] {"BF", "Fluo1", "Fluo2", "Fluo3", "Fluo4", "Fluo5", "Fluo6"};
-	private final String[] LIST_CHANNELS_CODE = new String[] {"BF", "100000", "010000", "001000", "000100", "000010", "000001"};
-	private final String[] LIST_FILTERS = new String[]{"1", "2","3","4","5"};
+	
+	/** The list of channel shown in the dialog, this list is only used to get the index of the selected channel, and the index is then used to get the actual light source from LIST_LIGHTSOURCES */ 
+	private final String[] LIST_LIGHTSOURCES_ID = new String[] {"BF", "Fluo1", "Fluo2", "Fluo3", "Fluo4", "Fluo5", "Fluo6"};
+	
+	/** String encoded light source, either "BF" or a string of six 0/1 for the LED sources. <br> 
+	 * Given the index of the channel selected in LIST_CHANNELS_ID, get the corresponding LIGHTSOURCE. <br> 
+	 * This could have been replaced by a mapping CHANNEL : LIGHT_SOURCE*/
+	private final String[] LIST_LIGHTSOURCES = new String[] {"BF", "100000", "010000", "001000", "000100", "000010", "000001"};
+	
+	private final String[] LIST_FILTERS = new String[]{"1","2","3","4","5"};
 	
 	/** Constructor called by the ToolbarAcquifer passing the newly created connection to the IM. */
 	public MoveIMToClick(TcpIp im){
@@ -100,7 +107,7 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 		
 		GenericDialogPlus dialog = new GenericDialogPlus("IM Click control");
 		dialog.addChoice("Objective", LIST_OBJECTIVES, LIST_OBJECTIVES[objectiveIndex-1]); // -1 since ObjectiveIndex is 1-based
-		dialog.addChoice("Channel", LIST_CHANNELS_ID, LIST_CHANNELS_ID[selectedChannel]);
+		dialog.addChoice("Light source", LIST_LIGHTSOURCES_ID, LIST_LIGHTSOURCES_ID[selectedLightsourceIndex]);
 		dialog.addChoice("Detection filter", LIST_FILTERS, LIST_FILTERS[detectionFilterIndex]);
 		
 		dialog.addMessage("Autofocus settings", dialog.getFont().deriveFont(Font.BOLD));
@@ -127,7 +134,7 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 		if (dialog.wasOKed()) {
 			
 			objectiveIndex = dialog.getNextChoiceIndex() + 1;
-			selectedChannel = dialog.getNextChoiceIndex();
+			selectedLightsourceIndex = dialog.getNextChoiceIndex();
 			detectionFilterIndex = dialog.getNextChoiceIndex();
 			
 			// AF settings
@@ -204,7 +211,8 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 		//im.moveXYto(xy_mm[0], xy_mm[1]);		
 		im.moveXYZto(xy_mm[0], xy_mm[1], z_um); // also move Z, TODO check if needed
 		
-		String lightSource = LIST_CHANNELS_CODE[selectedChannel];
+		// from the channel selected by the user, get the corresponding light source
+		String lightSource = LIST_LIGHTSOURCES[selectedLightsourceIndex]; 
 		
 		if (doAcquisition) {
 			im.setMode("script"); // script mode before AF and acquisition

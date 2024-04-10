@@ -41,12 +41,12 @@ public class ControlIM_XYZ implements PlugIn, ActionListener {
 		
 		dialog = new NonBlockingGenericDialog("IM control - Move objective to XYZ");
 		
-		dialog.addNumericField("X", im.getPositionX());
-		dialog.addNumericField("Y", im.getPositionY());
+		dialog.addNumericField("X (mm)", im.getPositionX());
+		dialog.addNumericField("Y (mm)", im.getPositionY());
 		dialog.addToSameRow();
 		dialog.addButton(LABEL_MOVE_XY, this);
 		
-		dialog.addNumericField("Z", im.getPositionZ());
+		dialog.addNumericField("Z (µm)", im.getPositionZ());
 		dialog.addToSameRow();
 		dialog.addButton(LABEL_MOVE_Z, this);
 		

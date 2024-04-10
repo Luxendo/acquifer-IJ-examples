@@ -1,10 +1,12 @@
 package acquifer.examples;
 
+import java.awt.Button;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
+import acquifer.core.TcpIp;
 import ij.IJ;
 import ij.gui.NonBlockingGenericDialog;
 import ij.plugin.PlugIn;
@@ -18,40 +20,64 @@ public class ControlIM_XYZ implements PlugIn, ActionListener {
 	
 	private NonBlockingGenericDialog dialog;
 	
+	private String LABEL_MOVE_XY = "Move XY";
+	private String LABEL_MOVE_Z = "Move Z";
+	
+	private TcpIp im;
+	
 	@Override
 	public void run(String arg) {
-
+		
+		try { 
+			im = new TcpIp(); // open the communication port with the IM
+		}
+		
+		catch (Exception error) {
+			IJ.error(error.getMessage());
+			error.printStackTrace();
+			return; 
+		}
+		
+		
 		dialog = new NonBlockingGenericDialog("IM control - Move objective to XYZ");
 		
-		dialog.addNumericField("X", 0);
+		dialog.addNumericField("X", im.getPositionX());
+		dialog.addNumericField("Y", im.getPositionY());
 		dialog.addToSameRow();
-		dialog.addButton("Move X", this);
+		dialog.addButton(LABEL_MOVE_XY, this);
 		
-		dialog.addNumericField("Y", 0);
+		dialog.addNumericField("Z", im.getPositionZ());
 		dialog.addToSameRow();
-		dialog.addButton("Move Y", this);
+		dialog.addButton(LABEL_MOVE_Z, this);
 		
-		dialog.addNumericField("Z", 0);
-		dialog.addToSameRow();
-		dialog.addButton("Move Z", this);
-		
+		dialog.hideCancelButton();
 		dialog.showDialog();
 	
-		//JOptionPane.showMessageDialog(null, "Hello World"); // also works when calledfro mthe dropdown
+		//JOptionPane.showMessageDialog(null, "Hello World"); // also works when called from the dropdown
 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		double x = dialog.getNextNumber();	
 		double y = dialog.getNextNumber();	
 		double z = dialog.getNextNumber();
 		
 		dialog.resetCounters(); // to make sure the next "GUI reading" start again from the first field of the gui. See https://wsr.imagej.net/plugins/Button_Example2.java
 		
-
-		// directly use MoveXYZ in one go
+		Button button = (Button) e.getSource();
+		String label = button.getLabel();
+		
+		if (label == LABEL_MOVE_XY)
+			im.moveXYto(x, y);
+		
+		else
+			im.moveZto(z);
 		
 	}
 
+		
 }
+
+

@@ -1,6 +1,5 @@
 package acquifer.toolbarIM;
 
-import java.awt.EventQueue;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
@@ -99,6 +98,9 @@ public class DropdownIM extends PlugInTool implements IJEventListener, ActionLis
 	@Override
 	/** Handles the clicks in the right click menu */
 	public void actionPerformed(ActionEvent e) {
+		
+		if (im == null)
+			return;
 		
 		switch(e.getActionCommand()) {
 			

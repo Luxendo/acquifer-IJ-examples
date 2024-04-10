@@ -64,7 +64,12 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 	private final String[] LIST_OBJECTIVES = new String[] {"2x", "4x", "10x", "20x"};
 	
 	/** The list of channel shown in the dialog, this list is only used to get the index of the selected channel, and the index is then used to get the actual light source from LIST_LIGHTSOURCES */ 
-	private final String[] LIST_LIGHTSOURCES_ID = new String[] {"BF", "Fluo1", "Fluo2", "Fluo3", "Fluo4", "Fluo5", "Fluo6"};
+	private final String[] LIST_LIGHTSOURCES_ID = new String[] {"BF", Prefs.get("lightsource.led1", "led1"), 
+																	  Prefs.get("lightsource.led2", "led2"), 
+																	  Prefs.get("lightsource.led3", "led3"),
+																	  Prefs.get("lightsource.led4", "led4"),
+																	  Prefs.get("lightsource.led5", "led5"),
+																	  Prefs.get("lightsource.led6", "led6")};
 	
 	/** String encoded light source, either "BF" or a string of six 0/1 for the LED sources. <br> 
 	 * Given the index of the channel selected in LIST_CHANNELS_ID, get the corresponding LIGHTSOURCE. <br> 
@@ -76,6 +81,10 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 	/** Constructor called by the ToolbarAcquifer passing the newly created connection to the IM. */
 	public MoveIMToClick(TcpIp im){
 		this.im = im;
+		
+		if (im == null)
+			return; // no connection established, then still work for testing but not able to control the IM
+		
 		parser = MetadataParser.getInstance();
 		
 		// Try adding this plugin as a listener to the ImageJ window
@@ -161,6 +170,9 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 	public void mouseClicked(ImagePlus imp, MouseEvent e) {
 		
 		super.mouseClicked(imp, e);
+		
+		if (im == null)
+			return;
 		
 		// Get image canvas and add click listener
 		ImageCanvas canvas = imp.getCanvas();

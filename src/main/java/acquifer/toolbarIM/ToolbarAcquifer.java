@@ -15,16 +15,15 @@ public class ToolbarAcquifer implements PlugIn {
 	@Override
 	public void run(String arg) {
 		
-		TcpIp im;
+		TcpIp im = null;
 		
 		try { 
 			im = new TcpIp(); // open the communication port with the IM
 		}
 		
 		catch (Exception error) {
-			IJ.error(error.getMessage());
+			IJ.error(error.getMessage() + "\nThe toolbar wont work.");
 			error.printStackTrace();
-			return; // The toolbar is not populated in this case
 		}
 		
 		Toolbar.addPlugInTool(new DropdownIM(im));

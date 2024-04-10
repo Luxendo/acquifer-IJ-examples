@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 - Smart Imaging toolbar, IM icon now is meant to be right-clicked, and the play icon is the one providing the click-tool rescreening
+- Smart Imaging toolbar can still be tested without an IM at hand
 
 ### Fixed
 - Smart Imaging click tool can handle hyperstack as genereated by the Make hyperstack plugin

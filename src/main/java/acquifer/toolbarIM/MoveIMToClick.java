@@ -76,7 +76,11 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 	 * This could have been replaced by a mapping CHANNEL : LIGHT_SOURCE*/
 	private final String[] LIST_LIGHTSOURCES = new String[] {"BF", "100000", "010000", "001000", "000100", "000010", "000001"};
 	
-	private final String[] LIST_FILTERS = new String[]{"1","2","3","4","5"};
+	private final String[] LIST_FILTERS = new String[]{Prefs.get("filtercube.1", "1"),
+													   Prefs.get("filtercube.2", "2"),
+													   Prefs.get("filtercube.3", "3"),
+													   Prefs.get("filtercube.4", "4"),
+													   Prefs.get("filtercube.5", "5")};
 	
 	/** Constructor called by the ToolbarAcquifer passing the newly created connection to the IM. */
 	public MoveIMToClick(TcpIp im){
@@ -209,8 +213,8 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 		
 		
 		// Extract Z and well ID from imageName
-		//double z_um = parser.getPositionZ(imageName) * 1000; //  before acquifer-core 3.3.0, return in mm
-		double z_um = parser.getPositionZ(imageName); // acquifer-core >= 3.3.0 getPositionZ is in µm 
+		//double z_um = parser.getPositionZ(imageName) * 1000; //  before acquifer-core 3.0.0, return in mm
+		double z_um = parser.getPositionZ(imageName); // acquifer-core >= 3.0.0 getPositionZ is in µm 
 		
 		IJ.log("\nMoving objective to clicked XY position, and Z-position of original image");
 

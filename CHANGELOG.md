@@ -3,11 +3,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [0.0.7] - Unreleased
+## [0.0.7] - 2024-08-13
 
 ### Added
 - Open/Close menu entry in smart imaging toolbar (right-click on IM icon)
-- SmartImaging > Set light source IDs (for click tool) plugin, allowing setting custom light source IDs instead of fluo1, 2, 3...
+- SmartImaging > Set led and filter IDs (for click tool) plugin, allowing setting custom light source IDs instead of fluo1, 2, 3, and filter names...
 
 ### Changed
 - Smart Imaging toolbar, IM icon now is meant to be right-clicked, and the play icon is the one providing the click-tool rescreening

@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.acquifer</groupId>
   <artifactId>acquifer-IJ-examples</artifactId>
-  <version>0.0.7-SNAPSHOT</version>
+  <version>0.0.7</version>
   
   	<parent>
 		<groupId>org.scijava</groupId>
@@ -64,10 +64,10 @@
 		<dependency>
 			<groupId>de.acquifer</groupId>
 			<artifactId>acquifer-core</artifactId>
-			<version>3.2.0</version>
+			<version>3.2.2</version>
 		</dependency>
 		
-		<dependency>	
+		<dependency>
 			<groupId>de.acquifer</groupId>
 			<artifactId>acquifer-IJ</artifactId>
 			<version>6.1.0</version>

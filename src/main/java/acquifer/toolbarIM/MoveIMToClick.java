@@ -187,7 +187,7 @@ public class MoveIMToClick extends PlugInTool implements KeyListener {
 		
 		// Get metadata used for the coordinates calculations
 		String imageName;
-		if (imp.isHyperStack()) { // make it compatible with the OpenInFiji tool
+		if (imp.isStack()) { // make it compatible with the OpenInFiji tool
 			
 			int sliceIndex = imp.getCurrentSlice(); // 1-based, reflect also hyperstack sliders
 			
